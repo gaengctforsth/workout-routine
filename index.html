@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="TRAINING">
+<meta name="theme-color" content="#0c0d10">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Crect width='180' height='180' rx='40' fill='%230c0d10'/%3E%3Ctext x='90' y='118' font-family='Arial' font-size='90' font-weight='900' fill='%23c6f135' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+<title>HYBRID · Training OS</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Expanded:wght@600;700;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#0c0d10; --bg2:#131419; --card:#16181f; --card2:#1c1f28;
+  --line:#262a35; --line2:#323743;
+  --ink:#f4f5f7; --sub:#8b90a0; --dim:#5a5f6e;
+  --accent:#c6f135; --accent-dim:#a3c925;
+  --skill:#4f9bff; --power:#ff5a52; --hyper:#3ddb8f; --acc:#b07cff; --core:#ffb13d; --cond:#ff7e3d;
+  --skill-bg:#4f9bff1a; --power-bg:#ff5a521a; --hyper-bg:#3ddb8f1a; --acc-bg:#b07cff1a; --core-bg:#ffb13d1a; --cond-bg:#ff7e3d1a;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideIn{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:translateX(0)}}
+@keyframes popIn{0%{transform:scale(.8);opacity:0}60%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes checkPop{0%{transform:scale(0)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
+@keyframes ringGlow{0%,100%{filter:drop-shadow(0 0 4px var(--accent))}50%{filter:drop-shadow(0 0 14px var(--accent))}}
+@keyframes barFill{from{width:0}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+
+html,body{background:var(--bg)}
+body{color:var(--ink);font-family:'Archivo','Noto Sans KR',sans-serif;-webkit-font-smoothing:antialiased;padding-bottom:90px;padding-bottom:calc(90px + env(safe-area-inset-bottom))}
+.hero{padding-top:calc(30px + env(safe-area-inset-top))!important}
+.wrap{max-width:540px;margin:0 auto;position:relative}
+
+.hero{padding:30px 22px 24px;background:linear-gradient(160deg,#16181f 0%,#0c0d10 100%);border-bottom:1px solid var(--line);animation:fadeUp .5s ease}
+.brand{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.brand-dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent);animation:pulse 2.5s ease infinite}
+.brand-txt{font-size:11px;letter-spacing:3.5px;text-transform:uppercase;color:var(--sub);font-weight:600}
+.hero h1{font-family:'Archivo Expanded','Archivo';font-weight:800;font-size:34px;line-height:.98;letter-spacing:-.5px;text-transform:uppercase}
+.hero h1 .gl{color:var(--accent)}
+.stats{display:flex;gap:0;margin-top:20px;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.st{flex:1;padding:12px 14px;border-right:1px solid var(--line);transition:.2s}
+.st:last-child{border:none}
+.st .v{font-family:'Archivo';font-weight:800;font-size:19px;letter-spacing:-.3px}
+.st .v .un{font-size:11px;color:var(--sub);font-weight:600;margin-left:2px}
+.st .l{font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin-top:2px;font-weight:600}
+
+.phases{display:flex;gap:8px;padding:18px 22px 6px}
+.phase{flex:1;padding:12px 6px;text-align:center;border:1px solid var(--line);border-radius:13px;cursor:pointer;background:var(--card);transition:transform .18s cubic-bezier(.34,1.56,.64,1),background .2s,border-color .2s}
+.phase:active{transform:scale(.94)}
+.phase.on{background:var(--accent);border-color:var(--accent)}
+.phase .n{font-family:'Archivo';font-weight:800;font-size:15px;letter-spacing:.3px}
+.phase.on .n{color:#10120a}
+.phase .s{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--sub);margin-top:2px;font-weight:600}
+.phase.on .s{color:#3a3f1a}
+
+.rail{display:flex;gap:8px;padding:14px 22px;overflow-x:auto;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.day{flex-shrink:0;min-width:70px;padding:12px 8px;text-align:center;border:1px solid var(--line);border-radius:14px;cursor:pointer;background:var(--card);transition:transform .18s cubic-bezier(.34,1.56,.64,1),background .2s,border-color .2s;position:relative;overflow:hidden}
+.day:active{transform:scale(.93)}
+.day.on{border-color:var(--accent);background:var(--card2)}
+.day .dn{font-family:'Archivo';font-weight:800;font-size:14px;letter-spacing:.5px;color:var(--ink)}
+.day.on .dn{color:var(--accent)}
+.day .df{font-size:9px;color:var(--dim);margin-top:3px;letter-spacing:.3px;font-weight:500}
+.day .prog{position:absolute;bottom:0;left:0;height:3px;background:var(--accent);border-radius:2px;transition:width .45s cubic-bezier(.4,0,.2,1)}
+
+.sess{padding:8px 22px 0}
+.sess-head{display:flex;align-items:flex-start;justify-content:space-between;padding:16px 0 14px;border-bottom:1px solid var(--line);animation:fadeUp .4s ease}
+.sh-l .fc{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);font-weight:700}
+.sh-l .ti{font-family:'Archivo Expanded','Archivo';font-weight:800;font-size:26px;text-transform:uppercase;margin-top:5px;letter-spacing:-.3px;line-height:1}
+.sh-l .su{font-size:12px;color:var(--sub);margin-top:7px}
+.sh-r{text-align:right;flex-shrink:0;padding-top:2px}
+.sh-r .dur{font-family:'Archivo';font-weight:800;font-size:20px;color:var(--ink)}
+.sh-r .durl{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--dim);font-weight:600}
+
+.psum{display:flex;align-items:center;gap:12px;padding:14px 0 4px;animation:fadeUp .45s ease}
+.psum-bar{flex:1;height:7px;background:var(--line);border-radius:5px;overflow:hidden;position:relative}
+.psum-fill{height:100%;background:linear-gradient(90deg,var(--accent-dim),var(--accent));border-radius:5px;width:0;transition:width .45s cubic-bezier(.4,0,.2,1);position:relative}
+.psum-fill::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,#ffffff44,transparent);background-size:200% 100%;animation:shimmer 2s infinite}
+.psum-txt{font-size:11px;color:var(--sub);font-weight:600;font-variant-numeric:tabular-nums}
+.reset-btn{font-size:10px;color:var(--dim);background:none;border:1px solid var(--line);border-radius:8px;padding:5px 9px;cursor:pointer;font-weight:600;letter-spacing:.5px;transition:.15s}
+.reset-btn:active{background:var(--card2);transform:scale(.95)}
+
+.wu{margin:16px 0;border:1px solid var(--line);border-radius:15px;overflow:hidden;background:var(--card);animation:fadeUp .5s ease}
+.wu-h{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;cursor:pointer}
+.wu-h .t{font-size:12px;font-weight:700;letter-spacing:.5px;color:var(--core);display:flex;align-items:center;gap:8px}
+.wu-h .ic{font-size:18px;color:var(--core);transition:transform .3s cubic-bezier(.34,1.56,.64,1);font-weight:300}
+.wu.open .wu-h .ic{transform:rotate(135deg)}
+.wu-b{max-height:0;overflow:hidden;transition:max-height .35s ease;padding:0 16px}
+.wu.open .wu-b{max-height:600px;padding:2px 16px 16px}
+.wu-grp{margin-top:12px}
+.wu-grp .gt{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--core);margin-bottom:7px;font-weight:700;opacity:.8}
+.wu-r{display:flex;justify-content:space-between;padding:7px 0;font-size:12.5px;border-bottom:1px solid var(--line)}
+.wu-r:last-child{border:none}
+.wu-r .n{color:var(--sub)}
+.wu-r .v{font-weight:700;color:var(--dim);font-variant-numeric:tabular-nums}
+
+.blocks{padding:6px 0 12px}
+.blk{margin-top:22px;animation:slideIn .4s ease both}
+.blk:first-child{margin-top:10px}
+.blk-h{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.chip{font-size:9px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;padding:5px 10px;border-radius:8px}
+.c-skill{background:var(--skill-bg);color:var(--skill)} .c-power{background:var(--power-bg);color:var(--power)}
+.c-hyper{background:var(--hyper-bg);color:var(--hyper)} .c-acc{background:var(--acc-bg);color:var(--acc)}
+.c-core{background:var(--core-bg);color:var(--core)} .c-cond{background:var(--cond-bg);color:var(--cond)}
+.blk-d{font-size:11px;color:var(--sub);font-weight:500}
+
+.ex{display:flex;align-items:center;gap:13px;padding:14px;background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:8px;cursor:pointer;transition:transform .15s,background .2s,border-color .2s;position:relative;overflow:hidden;animation:fadeUp .4s ease both}
+.ex:active{transform:scale(.985)}
+.ex::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);transform:scaleY(0);transition:transform .25s}
+.ex.done::before{transform:scaleY(1)}
+.ex.done{border-color:var(--line2)}
+.ex.done .ex-n,.ex.done .ex-s,.ex.done .ex-w{opacity:.4;transition:opacity .3s}
+.ex.done .ex-n{text-decoration:line-through;text-decoration-color:var(--dim)}
+.check{width:24px;height:24px;border-radius:8px;border:2px solid var(--line2);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.2s}
+.ex.done .check{background:var(--accent);border-color:var(--accent);animation:checkPop .35s cubic-bezier(.34,1.56,.64,1)}
+.check svg{width:13px;height:13px;opacity:0;transition:.15s}
+.ex.done .check svg{opacity:1}
+.ex-l{flex:1;min-width:0}
+.ex-n{font-size:14px;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:7px;flex-wrap:wrap;line-height:1.3}
+.muscle-tag{font-size:8.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--dim);background:var(--bg2);border:1px solid var(--line);border-radius:5px;padding:2px 6px}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.dot.s{background:var(--skill)}
+.b3b{font-size:8px;font-weight:800;letter-spacing:.5px;color:var(--power);border:1.3px solid var(--power);border-radius:5px;padding:1.5px 5px}
+.ex-s{font-size:11.5px;color:var(--sub);margin-top:4px;font-weight:500;font-variant-numeric:tabular-nums;display:flex;align-items:center;gap:8px}
+.swap{font-size:10px;color:var(--skill);font-weight:600;cursor:pointer;transition:.15s}
+.swap:active{opacity:.6}
+.ex-w{text-align:right;flex-shrink:0;min-width:64px}
+.ex-w .num{font-family:'Archivo';font-weight:800;font-size:24px;letter-spacing:-.5px;line-height:1}
+.ex-w.load .num,.ex-w.gain .num{color:var(--accent)}
+.ex-w.bw .num{font-size:14px;color:var(--sub);font-weight:700}
+.ex-w.free .num{font-size:13px;color:var(--dim);font-weight:600}
+.ex-w .u{font-size:8.5px;color:var(--dim);letter-spacing:1px;text-transform:uppercase;margin-top:2px;font-weight:600}
+
+.cardio{margin:6px 0 4px;display:flex;align-items:center;gap:13px;padding:15px 16px;background:linear-gradient(120deg,var(--hyper-bg),transparent);border:1px solid #3ddb8f33;border-radius:15px;animation:fadeUp .45s ease}
+.cardio .em{font-size:21px}
+.cardio .t{font-size:13px;font-weight:700;color:var(--hyper)}
+.cardio .s{font-size:11.5px;color:var(--sub);margin-top:2px}
+.norest{margin:6px 0 4px;display:flex;align-items:center;gap:13px;padding:15px 16px;background:linear-gradient(120deg,var(--power-bg),transparent);border:1px solid #ff5a5233;border-radius:15px;font-size:12.5px;color:var(--power);font-weight:600;animation:fadeUp .45s ease}
+
+.timer-ov{position:fixed;inset:0;background:rgba(8,9,12,.94);backdrop-filter:blur(8px);z-index:100;display:none;flex-direction:column;align-items:center;justify-content:center;gap:30px}
+.timer-ov.show{display:flex;animation:fadeUp .3s ease}
+.tov-time{font-family:'Archivo';font-weight:800;font-size:88px;letter-spacing:-2px;color:var(--accent);font-variant-numeric:tabular-nums}
+.tov-ring{position:relative;width:240px;height:240px;display:flex;align-items:center;justify-content:center;animation:ringGlow 3s ease infinite}
+.tov-ring svg{position:absolute;transform:rotate(-90deg)}
+.tov-label{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--sub);font-weight:700}
+.tov-actions{display:flex;gap:12px}
+.tov-btn{font-family:'Archivo';font-weight:700;font-size:14px;padding:13px 26px;border-radius:13px;border:1px solid var(--line2);background:var(--card);color:var(--ink);cursor:pointer;transition:.15s}
+.tov-btn:active{transform:scale(.94)}
+.tov-btn.primary{background:var(--accent);color:#10120a;border-color:var(--accent)}
+
+.legend{margin:20px 22px 0;padding:18px;background:var(--card);border:1px solid var(--line);border-radius:16px;animation:fadeUp .5s ease}
+.legend h4{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sub);margin-bottom:13px;font-weight:700}
+.lg-row{display:flex;flex-wrap:wrap;gap:13px 18px}
+.lg{display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--sub);font-weight:500}
+.lg .sw{width:16px;height:10px;border-radius:4px}
+.lg .dt{width:8px;height:8px;border-radius:50%;background:var(--skill)}
+.foot{margin:14px 22px 0;font-size:11.5px;line-height:1.85;color:var(--dim)}
+.foot b{color:var(--sub);font-weight:600}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--accent);color:#10120a;font-weight:700;font-size:13px;padding:12px 22px;border-radius:13px;z-index:200;transition:transform .35s cubic-bezier(.34,1.56,.64,1),opacity .3s;opacity:0;box-shadow:0 8px 30px rgba(198,241,53,.25)}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+.confetti{position:fixed;width:9px;height:9px;z-index:300;pointer-events:none;border-radius:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+  <div class="brand"><span class="brand-dot"></span><span class="brand-txt">Fighter Build · 주지태 Protocol</span></div>
+  <h1>WEEKLY<br><span class="gl">TRAINING</span> OS</h1>
+  <div class="stats">
+    <div class="st"><div class="v">84<span class="un">→72</span></div><div class="l">최종 kg</div></div>
+    <div class="st"><div class="v">6<span class="un">일</span></div><div class="l">주간</div></div>
+    <div class="st"><div class="v">파이터형</div><div class="l">조밀·선명</div></div>
+  </div>
+</div>
+
+<div class="phases">
+  <div class="phase on" onclick="setP(0,this)"><div class="n">PHASE 1</div><div class="s">적응 1-4주</div></div>
+  <div class="phase" onclick="setP(1,this)"><div class="n">PHASE 2</div><div class="s">증량 5-8주</div></div>
+  <div class="phase" onclick="setP(2,this)"><div class="n">PHASE 3</div><div class="s">피크 9-12주</div></div>
+</div>
+
+<div class="rail" id="rail"></div>
+<div class="sess" id="sess"></div>
+
+<div class="legend">
+  <h4>블록 / 마커 범례</h4>
+  <div class="lg-row">
+    <div class="lg"><span class="sw" style="background:var(--skill)"></span>스킬·맨몸</div>
+    <div class="lg"><span class="sw" style="background:var(--power)"></span>파워·3대</div>
+    <div class="lg"><span class="sw" style="background:var(--hyper)"></span>근비대</div>
+    <div class="lg"><span class="sw" style="background:var(--acc)"></span>아이솔레이션</div>
+    <div class="lg"><span class="sw" style="background:var(--core)"></span>코어·복근</div>
+    <div class="lg"><span class="sw" style="background:var(--cond)"></span>컨디셔닝</div>
+    <div class="lg"><span class="dt"></span>맨몸 운동</div>
+  </div>
+  <div class="foot">
+    <b>탭하면 세트 완료 체크</b> · 진행률 자동 저장 + 휴식 타이머 자동 실행<br>
+    <b>복근 주 3회</b> (월·목·토) · 허리 얇게 유지 위해 오블리크 과부하 배제, 복직근·하복부 중심<br>
+    <b>컨디셔닝 주 2회</b> (화·금) · 크로스핏형 웨이트 메트콘 — 파이터 밀도·체지방 컷<br>
+    <b>주지태 목표</b> — 76kg 1차 → 근육 더 쌓고 → 72kg 2차 컷에서 선명도 완성
+  </div>
+</div>
+
+</div>
+
+<div class="timer-ov" id="timerOv">
+  <div class="tov-ring">
+    <svg width="240" height="240"><circle cx="120" cy="120" r="110" fill="none" stroke="#262a35" stroke-width="8"/><circle id="ringFill" cx="120" cy="120" r="110" fill="none" stroke="#c6f135" stroke-width="8" stroke-linecap="round" stroke-dasharray="691" stroke-dashoffset="0" style="transition:stroke-dashoffset 1s linear"/></svg>
+    <div style="text-align:center"><div class="tov-time" id="tovTime">2:00</div><div class="tov-label" id="tovLabel">REST</div></div>
+  </div>
+  <div class="tov-actions">
+    <button class="tov-btn" onclick="addTime(30)">+30s</button>
+    <button class="tov-btn primary" onclick="closeTimer()">완료</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const WU={
+ push:{a:[["점프잭","30초 ×2"],["어깨 원 운동","각 10"],["밴드 풀어파트","15 ×2"]],b:[["벽 슬라이드","10 ×2"],["푸쉬업","15 ×2"],["웜업 벤치 (빈봉)","12"],["웜업 벤치 50%","6"]]},
+ pull:{a:[["점프잭","30초 ×2"],["어깨 원 운동","각 10"],["손목·목 회전","각 10"]],b:[["데드행","20초 ×3"],["밴드 풀어파트","15 ×2"],["스캐퓰러 풀업","8 ×2"],["맨몸 풀업","3-5"]]},
+ delt:{a:[["점프잭","30초 ×2"],["어깨 원 운동","각 10"],["팔 스윙","각 10"]],b:[["밴드 풀어파트","15 ×2"],["가벼운 레터럴","15 ×2"],["월 슬라이드","10 ×2"]]},
+ legs:{a:[["점프잭","30초 ×2"],["고관절 원 운동","각 10"],["레그 스윙","각 10"]],b:[["맨몸 스쿼트","15 ×2"],["워킹 런지","10보 ×2"],["웜업 스쿼트 50%","8"],["70%","5"],["85%","3"]]},
+ upper:{a:[["점프잭","30초 ×2"],["어깨 원 운동","각 10"],["팔 스윙","각 10"]],b:[["밴드 풀어파트","15 ×2"],["월 슬라이드","10 ×2"],["웜업 첫종목 50%","10"]]}
+};
+/* ex: [name, sets, weight, cali, big3, muscle, rest, swap] */
+const ABS={ // 복근 블록 (월·목·토 분산, 부위 다르게)
+ mon:{c:"core",cc:"c-core",d:"복근 · 하복부 중심 (허리 얇게)",e:[
+   ["행잉 레그 레이즈","3 × 15","BW",1,0,"하복부",45,"리버스 크런치"],
+   ["케이블 크런치","3 × 15","__CC__",0,0,"복직근 상부",45,"머신 크런치"]]},
+ thu:{c:"core",cc:"c-core",d:"복근 · 안정성 (데드 후 가볍게)",e:[
+   ["플랭크","3 × 60초","BW",1,0,"복직근 전체",45,"하이 플랭크"],
+   ["데드버그","3 × 12","BW",1,0,"코어 안정",30,"버드독"]]},
+ sat:{c:"core",cc:"c-core",d:"복근 · 디테일 (선명도)",e:[
+   ["행잉 니 레이즈 (트위스트)","3 × 12","BW",1,0,"하복부·세레이션",45,"V업"],
+   ["케이블 크런치","3 × 15","__CC__",0,0,"복직근",45,"디클라인 싯업"],
+   ["플랭크","3 × 60초","BW",1,0,"코어 전체",30,"할로우홀드"]]}
+};
+/* 컨디셔닝 (화·금) - 덤벨/맨몸만, 라운드당 횟수 명시 */
+const COND={
+ tue:{c:"cond",cc:"c-cond",d:"12분 AMRAP · 아래 1라운드 반복 (목표 6~8라운드)",e:[
+   ["덤벨 스윙 (양손 1개)","15회 / 라운드","20kg",0,0,"전신·후면",0,"덤벨 데드리프트"],
+   ["덤벨 고블릿 스쿼트","12회 / 라운드","20kg",0,0,"하체",0,"점프 스쿼트"],
+   ["버피","10회 / 라운드","BW",1,0,"전신",0,"마운틴클라이머 20회"]]},
+ fri:{c:"cond",cc:"c-cond",d:"15분 EMOM · 매분 1종목 순환 (총 5사이클)",e:[
+   ["덤벨 파머스 워크 (양손)","40m / 분","각 24kg",0,0,"그립·코어",0,"제자리 홀드 40초"],
+   ["덤벨 스러스터 (스쿼트+프레스)","10회 / 분","각 14kg",0,0,"전신·어깨",0,"덤벨 푸쉬프레스"],
+   ["덤벨 워킹런지 (제자리)","12회/leg / 분","각 12kg",0,0,"하체·심폐",0,"맨몸 점프런지"]]}
+};
+
+function P(){return 0}
+const M=[
+{ /* ===== PHASE 1 ===== */
+ mon:{fc:"Push · 가슴/어깨/삼두",ti:"BENCH",su:"벤치 메인 · 하부 가슴 + 복근",dur:"70",wu:"push",abs:"mon",blk:[
+  {c:"skill",cc:"c-skill",d:"어깨 컨트롤",e:[["파이크 푸쉬업","4 × 6-8","BW",1,0,"어깨",90,"HSPU 벽보조"]]},
+  {c:"power",cc:"c-power",d:"3대 + 가중 맨몸",e:[
+    ["바벨 벤치프레스","5 × 5","75kg",0,1,"가슴 전체",180,"덤벨 벤치"],
+    ["가중 딥스","4 × 6","+15kg",1,0,"하부 가슴·삼두",150,"디클라인 프레스"]]},
+  {c:"hyper",cc:"c-hyper",d:"상부 가슴 + 측면 어깨",e:[
+    ["인클라인 덤벨 프레스","3 × 10","26kg",0,0,"상부 가슴",90,"인클라인 머신"],
+    ["케이블 레터럴 레이즈","4 × 15","10kg",0,0,"측면 어깨",60,"덤벨 레터럴"]]},
+  {c:"acc",cc:"c-acc",d:"삼두 (오버헤드=스트레치)",e:[["오버헤드 케이블 익스텐션","3 × 12","25kg",0,0,"삼두 장두",60,"로프 푸시다운"]]}],cardio:"경사 트레드밀 20분 (5%, 6km/h)"},
+ tue:{fc:"Pull · 등/이두 + 컨디셔닝",ti:"PULL",su:"맨몸 풀 볼륨 + 메트콘",dur:"75",wu:"pull",cond:"tue",blk:[
+  {c:"skill",cc:"c-skill",d:"가장 어려운 스킬 먼저",e:[["머슬업 드릴 / 익스플로시브 풀업","5 × 3","BW",1,0,"등·전완",120,"하이 풀업"]]},
+  {c:"power",cc:"c-power",d:"가중 풀업 + 로우",e:[
+    ["가중 풀업","4 × 6","+7.5kg",1,0,"광배 너비",150,"랫풀다운"],
+    ["바벨 펜들레이 로우","4 × 8","70kg",0,0,"등 두께",120,"체스트서포티드 로우"]]},
+  {c:"hyper",cc:"c-hyper",d:"너비 + 두께",e:[
+    ["와이드 랫 풀다운","3 × 10","70kg",0,0,"광배 상부",90,"풀업"],
+    ["시티드 케이블 로우","3 × 12","50kg",0,0,"중부 등",75,"머신 로우"]]},
+  {c:"acc",cc:"c-acc",d:"후면 어깨 + 이두",e:[
+    ["페이스 풀","3 × 15","27kg",0,0,"후면 삼각",60,"리어 델트 플라이"],
+    ["인클라인 덤벨 컬","3 × 12","12kg",0,0,"이두 (스트레치)",60,"바벨 컬"]]}],cardio:null},
+ wed:{fc:"어깨 집중 + 팔",ti:"DELTS",su:"어깨 너비 우선 · 가벼운 날",dur:"55",wu:"delt",blk:[
+  {c:"skill",cc:"c-skill",d:"핸드스탠드 스킬",e:[["핸드스탠드 홀드 (벽)","5 × 30초","BW",1,0,"어깨·코어",90,"파이크 홀드"]]},
+  {c:"hyper",cc:"c-hyper",d:"측면 삼각 먼저 (지치기 전)",e:[
+    ["케이블 레터럴 레이즈","4 × 15","10kg",0,0,"측면 어깨",60,"덤벨 레터럴"],
+    ["아놀드 프레스","4 × 10","20kg",0,0,"전면·측면 어깨",90,"덤벨 OHP"],
+    ["리어 델트 케이블 플라이","3 × 15","8kg",0,0,"후면 어깨",60,"리버스 펙덱"]]},
+  {c:"acc",cc:"c-acc",d:"이두·삼두 슈퍼셋",e:[
+    ["EZ바 컬","4 × 10","30kg",0,0,"이두",60,"덤벨 컬"],
+    ["오버헤드 케이블 익스텐션","4 × 10","25kg",0,0,"삼두 장두",60,"스컬크러셔"]]}],cardio:"경사 트레드밀 20분"},
+ thu:{fc:"Legs + Deadlift",ti:"LEGS",su:"하체 헬데이 · 스쿼트+데드+복근",dur:"80",wu:"legs",abs:"thu",blk:[
+  {c:"skill",cc:"c-skill",d:"폭발력·균형",e:[
+    ["피스톨 스쿼트 (보조)","3 × 6/leg","BW",1,0,"쿼드·균형",90,"스플릿 스쿼트"],
+    ["박스 점프","3 × 5","BW",1,0,"폭발력",90,"점프 스쿼트"]]},
+  {c:"power",cc:"c-power",d:"3대 2개 · 가장 무거운 날",e:[
+    ["바벨 백스쿼트 (딥)","5 × 5","115kg",0,1,"쿼드·둔근 (스트레치)",180,"프론트 스쿼트"],
+    ["컨벤셔널 데드리프트","4 × 3","140kg",0,1,"후면사슬·등",210,"트랩바 데드"]]},
+  {c:"hyper",cc:"c-hyper",d:"보조",e:[
+    ["불가리안 스플릿 스쿼트","3 × 10/leg","BW",1,0,"쿼드·둔근",75,"런지"],
+    ["라잉 레그 컬","3 × 12","40kg",0,0,"햄스트링",60,"시티드 레그컬"],
+    ["스탠딩 카프 레이즈","4 × 15","60kg",0,0,"종아리",45,"시티드 카프"]]}],cardio:null},
+ fri:{fc:"Upper 종합 + 컨디셔닝",ti:"UPPER",su:"등·가슴·어깨 볼륨 + 메트콘",dur:"80",wu:"upper",cond:"fri",blk:[
+  {c:"skill",cc:"c-skill",d:"맨몸 풀",e:[["와이드그립 풀업","4 × 최대","BW",1,0,"광배 너비",120,"랫풀다운"]]},
+  {c:"power",cc:"c-power",d:"컴파운드",e:[
+    ["오버헤드 프레스","4 × 6","45kg",0,0,"어깨·삼두",150,"머신 숄더프레스"],
+    ["가중 딥스","3 × 8","+10kg",1,0,"하부 가슴·삼두",120,"디클라인 프레스"]]},
+  {c:"hyper",cc:"c-hyper",d:"볼륨",e:[
+    ["인클라인 덤벨 프레스","3 × 10","26kg",0,0,"상부 가슴",90,"인클라인 머신"],
+    ["체스트서포티드 로우","4 × 10","50kg",0,0,"중부 등",90,"케이블 로우"],
+    ["케이블 레터럴 레이즈","3 × 15","10kg",0,0,"측면 어깨",60,"덤벨 레터럴"]]}],cardio:null},
+ sat:{fc:"Arms + Core",ti:"ARMS",su:"팔 펌핑 + 복근 디테일",dur:"55",wu:"upper",abs:"sat",blk:[
+  {c:"skill",cc:"c-skill",d:"맨몸 팔",e:[
+    ["다이아몬드 푸쉬업","3 × 최대","BW",1,0,"삼두·가슴",75,"클로즈그립 벤치"],
+    ["친업 (좁은그립)","3 × 최대","BW",1,0,"이두·등",75,"케이블 컬"]]},
+  {c:"hyper",cc:"c-hyper",d:"이두·삼두 (스트레치 강조)",e:[
+    ["인클라인 덤벨 컬","4 × 10","12kg",0,0,"이두 (스트레치)",60,"바벨 컬"],
+    ["오버헤드 케이블 익스텐션","4 × 10","25kg",0,0,"삼두 장두",60,"스컬크러셔"],
+    ["스파이더 컬","3 × 12","20kg",0,0,"이두 단두",45,"프리처 컬"],
+    ["로프 푸시다운","3 × 12","32kg",0,0,"삼두 외측",45,"V바 푸시다운"]]}],cardio:"경사 트레드밀 20분"}
+},
+{ /* ===== PHASE 2 ===== */
+ mon:{fc:"Push · 가슴/어깨/삼두",ti:"BENCH",su:"벤치 메인 · 하부 가슴 + 복근",dur:"70",wu:"push",abs:"mon",blk:[
+  {c:"skill",cc:"c-skill",d:"어깨 컨트롤",e:[["파이크 푸쉬업","4 × 8-10","BW",1,0,"어깨",90,"HSPU 벽보조"]]},
+  {c:"power",cc:"c-power",d:"3대 + 가중 맨몸",e:[
+    ["바벨 벤치프레스","5 × 5","82.5kg",0,1,"가슴 전체",180,"덤벨 벤치"],
+    ["가중 딥스","4 × 6","+20kg",1,0,"하부 가슴·삼두",150,"디클라인 프레스"]]},
+  {c:"hyper",cc:"c-hyper",d:"상부 가슴 + 측면 어깨",e:[
+    ["인클라인 덤벨 프레스","3 × 10","28kg",0,0,"상부 가슴",90,"인클라인 머신"],
+    ["케이블 레터럴 레이즈","4 × 15","11kg",0,0,"측면 어깨",60,"덤벨 레터럴"]]},
+  {c:"acc",cc:"c-acc",d:"삼두 (오버헤드=스트레치)",e:[["오버헤드 케이블 익스텐션","3 × 12","27kg",0,0,"삼두 장두",60,"로프 푸시다운"]]}],cardio:"경사 트레드밀 20분"},
+ tue:{fc:"Pull · 등/이두 + 컨디셔닝",ti:"PULL",su:"맨몸 풀 볼륨 + 메트콘",dur:"75",wu:"pull",cond:"tue",blk:[
+  {c:"skill",cc:"c-skill",d:"가장 어려운 스킬 먼저",e:[["머슬업 (1-2개 목표)","5 × 3","BW",1,0,"등·전완",120,"하이 풀업"]]},
+  {c:"power",cc:"c-power",d:"가중 풀업 + 로우",e:[
+    ["가중 풀업","4 × 6","+10kg",1,0,"광배 너비",150,"랫풀다운"],
+    ["바벨 펜들레이 로우","4 × 8","75kg",0,0,"등 두께",120,"체스트서포티드 로우"]]},
+  {c:"hyper",cc:"c-hyper",d:"너비 + 두께",e:[
+    ["와이드 랫 풀다운","3 × 10","75kg",0,0,"광배 상부",90,"풀업"],
+    ["시티드 케이블 로우","3 × 12","55kg",0,0,"중부 등",75,"머신 로우"]]},
+  {c:"acc",cc:"c-acc",d:"후면 어깨 + 이두",e:[
+    ["페이스 풀","3 × 15","30kg",0,0,"후면 삼각",60,"리어 델트 플라이"],
+    ["인클라인 덤벨 컬","3 × 12","13kg",0,0,"이두 (스트레치)",60,"바벨 컬"]]}],cardio:null},
+ wed:{fc:"어깨 집중 + 팔",ti:"DELTS",su:"어깨 너비 우선 · 가벼운 날",dur:"55",wu:"delt",blk:[
+  {c:"skill",cc:"c-skill",d:"핸드스탠드 스킬",e:[["핸드스탠드 홀드 (자유 도전)","5 × 30초","BW",1,0,"어깨·코어",90,"파이크 홀드"]]},
+  {c:"hyper",cc:"c-hyper",d:"측면 삼각 먼저",e:[
+    ["케이블 레터럴 레이즈","4 × 15","11kg",0,0,"측면 어깨",60,"덤벨 레터럴"],
+    ["아놀드 프레스","4 × 10","22kg",0,0,"전면·측면 어깨",90,"덤벨 OHP"],
+    ["리어 델트 케이블 플라이","3 × 15","9kg",0,0,"후면 어깨",60,"리버스 펙덱"]]},
+  {c:"acc",cc:"c-acc",d:"이두·삼두 슈퍼셋",e:[
+    ["EZ바 컬","4 × 10","32.5kg",0,0,"이두",60,"덤벨 컬"],
+    ["오버헤드 케이블 익스텐션","4 × 10","27kg",0,0,"삼두 장두",60,"스컬크러셔"]]}],cardio:"경사 트레드밀 20분"},
+ thu:{fc:"Legs + Deadlift",ti:"LEGS",su:"하체 헬데이 · 스쿼트+데드+복근",dur:"80",wu:"legs",abs:"thu",blk:[
+  {c:"skill",cc:"c-skill",d:"폭발력·균형",e:[
+    ["피스톨 스쿼트","3 × 8/leg","BW",1,0,"쿼드·균형",90,"스플릿 스쿼트"],
+    ["박스 점프","3 × 5","BW",1,0,"폭발력",90,"점프 스쿼트"]]},
+  {c:"power",cc:"c-power",d:"3대 2개 · 가장 무거운 날",e:[
+    ["바벨 백스쿼트 (딥)","5 × 5","125kg",0,1,"쿼드·둔근 (스트레치)",180,"프론트 스쿼트"],
+    ["컨벤셔널 데드리프트","4 × 3","150kg",0,1,"후면사슬·등",210,"트랩바 데드"]]},
+  {c:"hyper",cc:"c-hyper",d:"보조",e:[
+    ["불가리안 스플릿 스쿼트","3 × 10/leg","8kg",1,0,"쿼드·둔근",75,"런지"],
+    ["라잉 레그 컬","3 × 12","45kg",0,0,"햄스트링",60,"시티드 레그컬"],
+    ["스탠딩 카프 레이즈","4 × 15","65kg",0,0,"종아리",45,"시티드 카프"]]}],cardio:null},
+ fri:{fc:"Upper 종합 + 컨디셔닝",ti:"UPPER",su:"등·가슴·어깨 볼륨 + 메트콘",dur:"80",wu:"upper",cond:"fri",blk:[
+  {c:"skill",cc:"c-skill",d:"맨몸 풀",e:[["와이드그립 풀업","4 × 최대","BW",1,0,"광배 너비",120,"랫풀다운"]]},
+  {c:"power",cc:"c-power",d:"컴파운드",e:[
+    ["오버헤드 프레스","4 × 6","50kg",0,0,"어깨·삼두",150,"머신 숄더프레스"],
+    ["가중 딥스","3 × 8","+15kg",1,0,"하부 가슴·삼두",120,"디클라인 프레스"]]},
+  {c:"hyper",cc:"c-hyper",d:"볼륨",e:[
+    ["인클라인 덤벨 프레스","3 × 10","28kg",0,0,"상부 가슴",90,"인클라인 머신"],
+    ["체스트서포티드 로우","4 × 10","55kg",0,0,"중부 등",90,"케이블 로우"],
+    ["케이블 레터럴 레이즈","3 × 15","11kg",0,0,"측면 어깨",60,"덤벨 레터럴"]]}],cardio:null},
+ sat:{fc:"Arms + Core",ti:"ARMS",su:"팔 펌핑 + 복근 디테일",dur:"55",wu:"upper",abs:"sat",blk:[
+  {c:"skill",cc:"c-skill",d:"맨몸 팔",e:[
+    ["다이아몬드 푸쉬업","3 × 최대","BW",1,0,"삼두·가슴",75,"클로즈그립 벤치"],
+    ["친업 (좁은그립)","3 × 최대","BW",1,0,"이두·등",75,"케이블 컬"]]},
+  {c:"hyper",cc:"c-hyper",d:"이두·삼두 (스트레치 강조)",e:[
+    ["인클라인 덤벨 컬","4 × 10","13kg",0,0,"이두 (스트레치)",60,"바벨 컬"],
+    ["오버헤드 케이블 익스텐션","4 × 10","27kg",0,0,"삼두 장두",60,"스컬크러셔"],
+    ["스파이더 컬","3 × 12","22kg",0,0,"이두 단두",45,"프리처 컬"],
+    ["로프 푸시다운","3 × 12","35kg",0,0,"삼두 외측",45,"V바 푸시다운"]]}],cardio:"경사 트레드밀 20분"}
+},
+{ /* ===== PHASE 3 ===== */
+ mon:{fc:"Push · 가슴/어깨/삼두",ti:"BENCH",su:"벤치 메인 · 하부 가슴 + 복근",dur:"70",wu:"push",abs:"mon",blk:[
+  {c:"skill",cc:"c-skill",d:"어깨 컨트롤",e:[["HSPU (벽 보조)","4 × 최대","BW",1,0,"어깨",90,"파이크 푸쉬업"]]},
+  {c:"power",cc:"c-power",d:"3대 + 가중 맨몸",e:[
+    ["바벨 벤치프레스","5 × 5","90kg",0,1,"가슴 전체",180,"덤벨 벤치"],
+    ["가중 딥스","4 × 5","+25kg",1,0,"하부 가슴·삼두",150,"디클라인 프레스"]]},
+  {c:"hyper",cc:"c-hyper",d:"상부 가슴 + 측면 어깨",e:[
+    ["인클라인 덤벨 프레스","3 × 10","30kg",0,0,"상부 가슴",90,"인클라인 머신"],
+    ["케이블 레터럴 레이즈","4 × 15","12kg",0,0,"측면 어깨",60,"덤벨 레터럴"]]},
+  {c:"acc",cc:"c-acc",d:"삼두 (오버헤드=스트레치)",e:[["오버헤드 케이블 익스텐션","3 × 12","30kg",0,0,"삼두 장두",60,"로프 푸시다운"]]}],cardio:"경사 트레드밀 20분"},
+ tue:{fc:"Pull · 등/이두 + 컨디셔닝",ti:"PULL",su:"맨몸 풀 볼륨 + 메트콘",dur:"75",wu:"pull",cond:"tue",blk:[
+  {c:"skill",cc:"c-skill",d:"가장 어려운 스킬 먼저",e:[["머슬업 (완성 목표)","5 × 3-5","BW",1,0,"등·전완",120,"하이 풀업"]]},
+  {c:"power",cc:"c-power",d:"가중 풀업 + 로우",e:[
+    ["가중 풀업","4 × 6","+12.5kg",1,0,"광배 너비",150,"랫풀다운"],
+    ["바벨 펜들레이 로우","4 × 8","80kg",0,0,"등 두께",120,"체스트서포티드 로우"]]},
+  {c:"hyper",cc:"c-hyper",d:"너비 + 두께",e:[
+    ["와이드 랫 풀다운","3 × 10","80kg",0,0,"광배 상부",90,"풀업"],
+    ["시티드 케이블 로우","3 × 12","57.5kg",0,0,"중부 등",75,"머신 로우"]]},
+  {c:"acc",cc:"c-acc",d:"후면 어깨 + 이두",e:[
+    ["페이스 풀","3 × 15","32kg",0,0,"후면 삼각",60,"리어 델트 플라이"],
+    ["인클라인 덤벨 컬","3 × 12","14kg",0,0,"이두 (스트레치)",60,"바벨 컬"]]}],cardio:null},
+ wed:{fc:"어깨 집중 + 팔",ti:"DELTS",su:"어깨 너비 우선 · 가벼운 날",dur:"55",wu:"delt",blk:[
+  {c:"skill",cc:"c-skill",d:"핸드스탠드 스킬",e:[["핸드스탠드 홀드 (프리 도전)","5 × 40초","BW",1,0,"어깨·코어",90,"파이크 홀드"]]},
+  {c:"hyper",cc:"c-hyper",d:"측면 삼각 먼저",e:[
+    ["케이블 레터럴 레이즈","4 × 15","12kg",0,0,"측면 어깨",60,"덤벨 레터럴"],
+    ["아놀드 프레스","4 × 10","24kg",0,0,"전면·측면 어깨",90,"덤벨 OHP"],
+    ["리어 델트 케이블 플라이","3 × 15","10kg",0,0,"후면 어깨",60,"리버스 펙덱"]]},
+  {c:"acc",cc:"c-acc",d:"이두·삼두 슈퍼셋",e:[
+    ["EZ바 컬","4 × 10","35kg",0,0,"이두",60,"덤벨 컬"],
+    ["오버헤드 케이블 익스텐션","4 × 10","30kg",0,0,"삼두 장두",60,"스컬크러셔"]]}],cardio:"경사 트레드밀 20분"},
+ thu:{fc:"Legs + Deadlift",ti:"LEGS",su:"하체 헬데이 · 스쿼트+데드+복근",dur:"80",wu:"legs",abs:"thu",blk:[
+  {c:"skill",cc:"c-skill",d:"폭발력·균형",e:[
+    ["피스톨 스쿼트 (가중)","3 × 8/leg","+5kg",1,0,"쿼드·균형",90,"스플릿 스쿼트"],
+    ["박스 점프","3 × 5","BW",1,0,"폭발력",90,"점프 스쿼트"]]},
+  {c:"power",cc:"c-power",d:"3대 2개 · 가장 무거운 날",e:[
+    ["바벨 백스쿼트 (딥)","5 × 5","135kg",0,1,"쿼드·둔근 (스트레치)",180,"프론트 스쿼트"],
+    ["컨벤셔널 데드리프트","4 × 3","160kg",0,1,"후면사슬·등",210,"트랩바 데드"]]},
+  {c:"hyper",cc:"c-hyper",d:"보조",e:[
+    ["불가리안 스플릿 스쿼트","3 × 10/leg","12kg",1,0,"쿼드·둔근",75,"런지"],
+    ["라잉 레그 컬","3 × 12","50kg",0,0,"햄스트링",60,"시티드 레그컬"],
+    ["스탠딩 카프 레이즈","4 × 15","70kg",0,0,"종아리",45,"시티드 카프"]]}],cardio:null},
+ fri:{fc:"Upper 종합 + 컨디셔닝",ti:"UPPER",su:"등·가슴·어깨 볼륨 + 메트콘",dur:"80",wu:"upper",cond:"fri",blk:[
+  {c:"skill",cc:"c-skill",d:"맨몸 풀",e:[["와이드그립 풀업 (목표 15+)","4 × 최대","BW",1,0,"광배 너비",120,"랫풀다운"]]},
+  {c:"power",cc:"c-power",d:"컴파운드",e:[
+    ["오버헤드 프레스","4 × 6","55kg",0,0,"어깨·삼두",150,"머신 숄더프레스"],
+    ["가중 딥스","3 × 8","+20kg",1,0,"하부 가슴·삼두",120,"디클라인 프레스"]]},
+  {c:"hyper",cc:"c-hyper",d:"볼륨",e:[
+    ["인클라인 덤벨 프레스","3 × 10","30kg",0,0,"상부 가슴",90,"인클라인 머신"],
+    ["체스트서포티드 로우","4 × 10","60kg",0,0,"중부 등",90,"케이블 로우"],
+    ["케이블 레터럴 레이즈","3 × 15","12kg",0,0,"측면 어깨",60,"덤벨 레터럴"]]}],cardio:null},
+ sat:{fc:"Arms + Core",ti:"ARMS",su:"팔 펌핑 + 복근 디테일",dur:"55",wu:"upper",abs:"sat",blk:[
+  {c:"skill",cc:"c-skill",d:"맨몸 팔",e:[
+    ["다이아몬드 푸쉬업","3 × 최대","BW",1,0,"삼두·가슴",75,"클로즈그립 벤치"],
+    ["친업 (좁은그립, 가중)","3 × 최대","+5kg",1,0,"이두·등",75,"케이블 컬"]]},
+  {c:"hyper",cc:"c-hyper",d:"이두·삼두 (스트레치 강조)",e:[
+    ["인클라인 덤벨 컬","4 × 10","14kg",0,0,"이두 (스트레치)",60,"바벨 컬"],
+    ["오버헤드 케이블 익스텐션","4 × 10","30kg",0,0,"삼두 장두",60,"스컬크러셔"],
+    ["스파이더 컬","3 × 12","24kg",0,0,"이두 단두",45,"프리처 컬"],
+    ["로프 푸시다운","3 × 12","37.5kg",0,0,"삼두 외측",45,"V바 푸시다운"]]}],cardio:"경사 트레드밀 20분"}
+}
+];
+// 복근 중량 (페이즈별)
+const ABSCC=["37kg","42kg","45kg"];
+
+const DAYS=[["mon","MON","Bench+복근"],["tue","TUE","Pull+컨디"],["wed","WED","어깨·팔"],["thu","THU","Legs+복근"],["fri","FRI","Upper+컨디"],["sat","SAT","Arms+복근"]];
+let cp=0,cd="mon";
+
+function key(p,d){return `hyb3_${p}_${d}`}
+function getDone(p,d){try{return JSON.parse(localStorage.getItem(key(p,d))||"[]")}catch(e){return[]}}
+function setDone(p,d,arr){try{localStorage.setItem(key(p,d),JSON.stringify(arr))}catch(e){}}
+
+function buildBlocks(p,d){
+  const day=M[p][d];
+  let blocks=day.blk.slice();
+  // 복근 삽입
+  if(day.abs){
+    let ab=JSON.parse(JSON.stringify(ABS[day.abs]));
+    ab.e.forEach(e=>{if(e[2]==='__CC__')e[2]=ABSCC[p];});
+    blocks.push(ab);
+  }
+  // 컨디셔닝 삽입
+  if(day.cond){
+    let cn=JSON.parse(JSON.stringify(COND[day.cond]));
+    blocks.push(cn);
+  }
+  return blocks;
+}
+function totalEx(p,d){return buildBlocks(p,d).reduce((s,b)=>s+b.e.length,0)}
+function dayProgress(p,d){const t=totalEx(p,d);if(!t)return 0;return getDone(p,d).length/t;}
+
+function setP(i,el){cp=i;document.querySelectorAll('.phase').forEach(p=>p.classList.remove('on'));el.classList.add('on');render();}
+function setD(d,el){cd=d;document.querySelectorAll('.day').forEach(p=>p.classList.remove('on'));el.classList.add('on');renderSess();}
+function toggleWU(){document.querySelector('.wu').classList.toggle('open');}
+
+function renderRail(){
+  document.getElementById('rail').innerHTML=DAYS.map(([k,n,f])=>{
+    const pr=Math.round(dayProgress(cp,k)*100);
+    return `<div class="day${k===cd?' on':''}" onclick="setD('${k}',this)"><div class="dn">${n}</div><div class="df">${f}</div><div class="prog" style="width:${pr}%"></div></div>`;
+  }).join('');
+}
+
+let exIndex=[];
+function renderSess(){
+  const d=M[cp][cd],wu=WU[d.wu],done=getDone(cp,cd);
+  const blocks=buildBlocks(cp,cd);
+  exIndex=[];let gi=0;
+  let h=`<div class="sess-head"><div class="sh-l"><div class="fc">${d.fc}</div><div class="ti">${d.ti}</div><div class="su">${d.su}</div></div><div class="sh-r"><div class="dur">${d.dur}'</div><div class="durl">예상</div></div></div>`;
+  const t=totalEx(cp,cd),dc=done.length,pct=t?Math.round(dc/t*100):0;
+  h+=`<div class="psum"><div class="psum-bar"><div class="psum-fill" style="width:${pct}%"></div></div><span class="psum-txt">${dc}/${t}</span><button class="reset-btn" onclick="resetDay()">리셋</button></div>`;
+  h+=`<div class="wu"><div class="wu-h" onclick="toggleWU()"><span class="t">⚡ 아침 워밍업 · 10분</span><span class="ic">+</span></div><div class="wu-b">
+    <div class="wu-grp"><div class="gt">Phase 1 · 각성 (3분)</div>${wu.a.map(([n,v])=>`<div class="wu-r"><span class="n">${n}</span><span class="v">${v}</span></div>`).join('')}</div>
+    <div class="wu-grp"><div class="gt">Phase 2 · 활성화 (7분)</div>${wu.b.map(([n,v])=>`<div class="wu-r"><span class="n">${n}</span><span class="v">${v}</span></div>`).join('')}</div></div></div>`;
+  h+=`<div class="blocks">`;
+  let bd=0;
+  blocks.forEach(b=>{
+    h+=`<div class="blk" style="animation-delay:${bd*0.05}s"><div class="blk-h"><span class="chip ${b.cc}">${b.c}</span><span class="blk-d">${b.d}</span></div>`;bd++;
+    let ed=0;
+    b.e.forEach(([n,s,w,cali,b3,mus,rest,swap])=>{
+      const idx=gi++;exIndex.push({rest,name:n});
+      const isBW=w==='BW';const isDone=done.includes(idx);
+      let cls,num,unit;
+      if(isBW){cls='bw';num='맨몸';unit='';}
+      else if(w.startsWith('+')){cls='gain';num=w.replace('kg','');unit='가중kg';}
+      else if(w.includes('kg')){cls='load';num=w.replace('kg','');unit='kg';}
+      else{cls='free';num=w;unit='';}
+      const dot=cali?'<span class="dot s"></span>':'';
+      const bb=b3?'<span class="b3b">3대</span>':'';
+      h+=`<div class="ex${isDone?' done':''}" data-i="${idx}" style="animation-delay:${ed*0.03}s" onclick="toggleEx(${idx},this)">
+        <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#10120a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="ex-l"><div class="ex-n">${dot}${n}${bb}<span class="muscle-tag">${mus}</span></div>
+        <div class="ex-s">${s}<span class="swap" onclick="event.stopPropagation();showSwap('${n.replace(/'/g,'')}','${swap}')">↻ 대체</span></div></div>
+        <div class="ex-w ${cls}"><div class="num">${num}</div>${unit?`<div class="u">${unit}</div>`:''}</div></div>`;ed++;
+    });
+    h+=`</div>`;
+  });
+  h+=`</div>`;
+  if(d.cardio===null){h+=`<div class="norest">🛑 별도 유산소 없음 · 컨디셔닝/헬데이가 대체</div>`;}
+  else{h+=`<div class="cardio"><span class="em">🏃</span><div><div class="t">마무리 유산소 20분</div><div class="s">${d.cardio}</div></div></div>`;}
+  document.getElementById('sess').innerHTML=h;
+}
+
+function toggleEx(idx,el){
+  let done=getDone(cp,cd);
+  if(done.includes(idx)){done=done.filter(x=>x!==idx);el.classList.remove('done');}
+  else{done.push(idx);el.classList.add('done');
+    const r=exIndex[idx]?exIndex[idx].rest:0;
+    if(r)openTimer(r);}
+  setDone(cp,cd,done);
+  const t=totalEx(cp,cd),dc=done.length,pct=t?Math.round(dc/t*100):0;
+  document.querySelector('.psum-fill').style.width=pct+'%';
+  document.querySelector('.psum-txt').textContent=`${dc}/${t}`;
+  renderRail();
+  if(dc===t){toast('🔥 세션 완료! 수고했어');fireConfetti();}
+}
+function resetDay(){setDone(cp,cd,[]);renderSess();renderRail();}
+
+let tLeft=0,tTotal=0,tInt=null;const R=691;
+function openTimer(sec){
+  tLeft=sec;tTotal=sec;
+  document.getElementById('timerOv').classList.add('show');
+  updTimer();clearInterval(tInt);
+  tInt=setInterval(()=>{tLeft--;updTimer();if(tLeft<=0){clearInterval(tInt);try{navigator.vibrate&&navigator.vibrate([200,100,200]);}catch(e){}toast('💪 휴식 끝! 다음 세트');closeTimer();}},1000);
+}
+function updTimer(){
+  const m=Math.floor(tLeft/60),s=tLeft%60;
+  document.getElementById('tovTime').textContent=`${m}:${String(s).padStart(2,'0')}`;
+  document.getElementById('ringFill').style.strokeDashoffset=R*(1-tLeft/tTotal);
+}
+function addTime(s){tLeft+=s;tTotal=Math.max(tTotal,tLeft);updTimer();}
+function closeTimer(){clearInterval(tInt);document.getElementById('timerOv').classList.remove('show');}
+
+function showSwap(name,swap){toast(`↻ ${name} → ${swap}`);}
+let toastT=null;
+function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('show'),2200);}
+
+function fireConfetti(){
+  const colors=['#c6f135','#4f9bff','#3ddb8f','#ff7e3d','#b07cff'];
+  for(let i=0;i<28;i++){
+    const c=document.createElement('div');c.className='confetti';
+    c.style.background=colors[i%colors.length];
+    c.style.left=(50+(Math.random()-.5)*30)+'%';c.style.top='40%';
+    document.body.appendChild(c);
+    const ang=Math.random()*Math.PI*2,vel=180+Math.random()*220;
+    const dx=Math.cos(ang)*vel,dy=Math.sin(ang)*vel-180;
+    c.animate([{transform:'translate(0,0) rotate(0)',opacity:1},{transform:`translate(${dx}px,${dy+400}px) rotate(${Math.random()*720}deg)`,opacity:0}],{duration:1100+Math.random()*500,easing:'cubic-bezier(.2,.6,.4,1)'}).onfinish=()=>c.remove();
+  }
+}
+
+function render(){renderRail();renderSess();}
+render();
+</script>
+</body>
+</html>
