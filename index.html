@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="TRAINING">
 <meta name="theme-color" content="#0c0d10">
-<link rel="apple-touch-icon" href="https://gaengctforsth.github.io/workout-routine/IMG_5499.png">
+<link rel="apple-touch-icon" href="https://gaengctforsth.github.io/workout-routine/icon.png">
 <title>HYBRID · Training OS</title>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Expanded:wght@600;700;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -16,9 +16,42 @@
   --bg:#0c0d10; --bg2:#131419; --card:#16181f; --card2:#1c1f28;
   --line:#262a35; --line2:#323743;
   --ink:#f4f5f7; --sub:#8b90a0; --dim:#5a5f6e;
-  --accent:#c6f135; --accent-dim:#a3c925;
+  --accent:#c6f135; --accent-dim:#a3c925; --accent-ink:var(--accent-ink);
   --skill:#4f9bff; --power:#ff5a52; --hyper:#3ddb8f; --acc:#b07cff; --core:#ffb13d; --cond:#ff7e3d;
   --skill-bg:#4f9bff1a; --power-bg:#ff5a521a; --hyper-bg:#3ddb8f1a; --acc-bg:#b07cff1a; --core-bg:#ffb13d1a; --cond-bg:#ff7e3d1a;
+}
+/* ===== THEMES ===== */
+[data-theme="midnight"]{ /* default lime already in :root, but explicit */
+  --bg:#0c0d10;--bg2:#131419;--card:#16181f;--card2:#1c1f28;--line:#262a35;--line2:#323743;
+  --ink:#f4f5f7;--sub:#8b90a0;--dim:#5a5f6e;--accent:#c6f135;--accent-dim:#a3c925;--accent-ink:var(--accent-ink);
+}
+[data-theme="blood"]{ /* 주지태 — 강렬한 레드 */
+  --bg:#0d0708;--bg2:#150a0c;--card:#1a0e10;--card2:#221316;--line:#33191d;--line2:#48222a;
+  --ink:#f5ecec;--sub:#a8888c;--dim:#6e4c52;--accent:#ff2d3f;--accent-dim:#cc1f2e;--accent-ink:#fff;
+}
+[data-theme="cyber"]{ /* 사이언 네온 */
+  --bg:#05080f;--bg2:#0a0f1a;--card:#0d1320;--card2:#121a2b;--line:#1c2638;--line2:#2a3850;
+  --ink:#e8f4ff;--sub:#7d97b8;--dim:#4a5e78;--accent:#00e5ff;--accent-dim:#00b8cc;--accent-ink:#021018;
+}
+[data-theme="gold"]{ /* 블랙골드 — 럭셔리 */
+  --bg:#0a0908;--bg2:#13110d;--card:#181510;--card2:#201c15;--line:#2e281d;--line2:#43392a;
+  --ink:#f5f0e6;--sub:#a89c84;--dim:#6e6450;--accent:#f5c451;--accent-dim:#cc9f3a;--accent-ink:#1a1408;
+}
+[data-theme="vapor"]{ /* 바이올렛/핑크 */
+  --bg:#0b0712;--bg2:#120b1d;--card:#170f26;--card2:#1f1533;--line:#2c1f44;--line2:#3e2c5e;
+  --ink:#f1ecf8;--sub:#9d88b8;--dim:#634d80;--accent:#c061ff;--accent-dim:#9d3fdb;--accent-ink:#120618;
+}
+[data-theme="forest"]{ /* 에메랄드 */
+  --bg:#060d0a;--bg2:#0a1611;--card:#0d1c15;--card2:#13261d;--line:#1c3528;--line2:#2a4a3a;
+  --ink:#e8f5ee;--sub:#84a896;--dim:#4e6e5e;--accent:#2bf58a;--accent-dim:#1fcc70;--accent-ink:#04180e;
+}
+[data-theme="ember"]{ /* 오렌지 선셋 */
+  --bg:#0f0805;--bg2:#1a0e08;--card:#20120a;--card2:#2a1810;--line:#3a241a;--line2:#523322;
+  --ink:#f8efe6;--sub:#b89684;--dim:#7e5c4c;--accent:#ff7a18;--accent-dim:#cc5f12;--accent-ink:#180a02;
+}
+[data-theme="arctic"]{ /* 라이트 모드 */
+  --bg:#f4f5f8;--bg2:#eaecf2;--card:#ffffff;--card2:#f0f2f7;--line:#e2e6ee;--line2:#d2d8e4;
+  --ink:#14161d;--sub:#697086;--dim:#9aa1b2;--accent:#3b5bff;--accent-dim:#2a45cc;--accent-ink:#fff;
 }
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 @keyframes slideIn{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:translateX(0)}}
@@ -53,7 +86,7 @@ body{color:var(--ink);font-family:'Archivo','Noto Sans KR',sans-serif;-webkit-fo
 .phase:active{transform:scale(.94)}
 .phase.on{background:var(--accent);border-color:var(--accent)}
 .phase .n{font-family:'Archivo';font-weight:800;font-size:15px;letter-spacing:.3px}
-.phase.on .n{color:#10120a}
+.phase.on .n{color:var(--accent-ink)}
 .phase .s{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--sub);margin-top:2px;font-weight:600}
 .phase.on .s{color:#3a3f1a}
 
@@ -119,6 +152,7 @@ body{color:var(--ink);font-family:'Archivo','Noto Sans KR',sans-serif;-webkit-fo
 .ex.done .check{background:var(--accent);border-color:var(--accent);animation:checkPop .35s cubic-bezier(.34,1.56,.64,1)}
 .check svg{width:13px;height:13px;opacity:0;transition:.15s}
 .ex.done .check svg{opacity:1}
+.check svg{color:var(--accent-ink)}
 .ex-l{flex:1;min-width:0}
 .ex-n{font-size:14px;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:7px;flex-wrap:wrap;line-height:1.3}
 .muscle-tag{font-size:8.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--dim);background:var(--bg2);border:1px solid var(--line);border-radius:5px;padding:2px 6px}
@@ -158,7 +192,7 @@ body{color:var(--ink);font-family:'Archivo','Noto Sans KR',sans-serif;-webkit-fo
 .tov-actions{display:flex;gap:12px}
 .tov-btn{font-family:'Archivo';font-weight:700;font-size:14px;padding:13px 26px;border-radius:13px;border:1px solid var(--line2);background:var(--card);color:var(--ink);cursor:pointer;transition:.15s}
 .tov-btn:active{transform:scale(.94)}
-.tov-btn.primary{background:var(--accent);color:#10120a;border-color:var(--accent)}
+.tov-btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 
 .legend{margin:20px 22px 0;padding:18px;background:var(--card);border:1px solid var(--line);border-radius:16px;animation:fadeUp .5s ease}
 .legend h4{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sub);margin-bottom:13px;font-weight:700}
@@ -168,22 +202,60 @@ body{color:var(--ink);font-family:'Archivo','Noto Sans KR',sans-serif;-webkit-fo
 .lg .dt{width:8px;height:8px;border-radius:50%;background:var(--skill)}
 .foot{margin:14px 22px 0;font-size:11.5px;line-height:1.85;color:var(--dim)}
 .foot b{color:var(--sub);font-weight:600}
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--accent);color:#10120a;font-weight:700;font-size:13px;padding:12px 22px;border-radius:13px;z-index:200;transition:transform .35s cubic-bezier(.34,1.56,.64,1),opacity .3s;opacity:0;box-shadow:0 8px 30px rgba(198,241,53,.25)}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--accent);color:var(--accent-ink);font-weight:700;font-size:13px;padding:12px 22px;border-radius:13px;z-index:200;transition:transform .35s cubic-bezier(.34,1.56,.64,1),opacity .3s;opacity:0;box-shadow:0 8px 30px rgba(198,241,53,.25)}
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 
 .confetti{position:fixed;width:9px;height:9px;z-index:300;pointer-events:none;border-radius:2px}
+
+/* theme button */
+.theme-btn{margin-left:auto;width:34px;height:34px;border-radius:10px;border:1px solid var(--line2);background:var(--card);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+.theme-btn:active{transform:scale(.9);background:var(--card2)}
+
+/* drawer */
+.drawer-ov{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(3px);z-index:150;opacity:0;pointer-events:none;transition:opacity .3s}
+.drawer-ov.show{opacity:1;pointer-events:auto}
+.drawer{position:fixed;left:0;right:0;bottom:0;max-width:540px;margin:0 auto;background:var(--card);border-top:1px solid var(--line2);border-radius:24px 24px 0 0;z-index:160;padding:14px 22px calc(28px + env(safe-area-inset-bottom));transform:translateY(110%);transition:transform .38s cubic-bezier(.34,1.4,.5,1)}
+.drawer.show{transform:translateY(0)}
+.drawer-handle{width:40px;height:4px;border-radius:3px;background:var(--line2);margin:0 auto 16px}
+.drawer-title{font-family:'Archivo';font-weight:800;font-size:18px;letter-spacing:-.2px;margin-bottom:16px}
+.drawer-sub{font-size:11px;color:var(--dim);text-align:center;margin-top:14px}
+.theme-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.theme-card{border:1.5px solid var(--line);border-radius:14px;padding:13px 14px;cursor:pointer;background:var(--bg2);transition:.18s;display:flex;align-items:center;gap:11px}
+.theme-card:active{transform:scale(.96)}
+.theme-card.on{border-color:var(--tc-accent)}
+.tc-swatch{width:30px;height:30px;border-radius:9px;flex-shrink:0;position:relative;overflow:hidden;border:1px solid #ffffff15}
+.tc-swatch .acc{position:absolute;right:0;bottom:0;width:15px;height:15px;border-radius:5px 0 8px 0}
+.tc-name{font-size:13px;font-weight:700}
+.tc-check{margin-left:auto;width:18px;height:18px;border-radius:50%;border:2px solid var(--line2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.theme-card.on .tc-check{background:var(--tc-accent);border-color:var(--tc-accent)}
+.theme-card.on .tc-check::after{content:'✓';font-size:11px;font-weight:900;color:#000}
+
+/* per-set chip interactive */
+.set-chip{cursor:pointer;user-select:none}
+.set-chip.done{background:var(--accent)!important;border-color:var(--accent)!important}
+.set-chip.done b{color:var(--accent-ink)!important}
+.set-chip.done .sx{color:var(--accent-ink)!important;opacity:.7}
+.set-chip:active{transform:scale(.93)}
+.set-chip.set-plain{padding:5px 11px}
+.set-chip.set-plain b{font-size:13px;color:var(--sub)}
+.set-chip.set-plain .sx{font-size:9px}
+.set-chip.set-plain.done b{color:var(--accent-ink)}
+.check{cursor:pointer}
+.check:active{transform:scale(.85)}
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <div class="hero">
-  <div class="brand"><span class="brand-dot"></span><span class="brand-txt">Fighter Build · 주지태 Protocol</span></div>
+  <div class="brand"><span class="brand-dot"></span><span class="brand-txt">Fighter Build · 주지태 Protocol</span>
+    <button class="theme-btn" onclick="openThemes()" aria-label="테마">🎨</button>
+  </div>
   <h1>WEEKLY<br><span class="gl">TRAINING</span> OS</h1>
   <div class="stats">
     <div class="st"><div class="v">84<span class="un">→72</span></div><div class="l">최종 kg</div></div>
     <div class="st"><div class="v">6<span class="un">일</span></div><div class="l">주간</div></div>
-    <div class="st"><div class="v">파이터형</div><div class="l">조밀·선명</div></div>
+    <div class="st" id="streakStat"><div class="v">0<span class="un">일</span></div><div class="l">연속 완료</div></div>
   </div>
 </div>
 
@@ -208,10 +280,10 @@ body{color:var(--ink);font-family:'Archivo','Noto Sans KR',sans-serif;-webkit-fo
     <div class="lg"><span class="dt"></span>맨몸 운동</div>
   </div>
   <div class="foot">
-    <b>탭하면 세트 완료 체크</b> · 진행률 자동 저장 + 휴식 타이머 자동 실행<br>
-    <b>3대·가중 맨몸 = 리버스 피라미드</b> — 무거운 톱셋부터 → 세트마다 무게↓ reps↑ (칩으로 세트별 무게 표시)<br>
-    <b>로우·OHP = 톱셋+백오프</b> — 톱셋 1개 무겁게 → 약 10% 낮춰 볼륨<br>
-    <b>증량</b> — 톱셋에서 목표 reps 다 채우면 다음에 2.5kg↑ · 컷 중엔 유지만 해도 성공
+    <b>세트별 칩을 탭</b>하면 그 세트 완료 + 휴식 타이머 자동 시작 · 체크박스는 운동 전체 일괄 완료<br>
+    <b>3대·가중 맨몸 = 리버스 피라미드</b> — 칩마다 세트별 무게 다름 (무거운 톱셋부터)<br>
+    <b>로우·OHP = 톱셋+백오프</b> · 데빌 프레스로 컨디셔닝 강화<br>
+    <b>🎨 우상단 버튼</b>으로 테마 8종 변경 · 모든 진행도·테마 자동 저장
   </div>
 </div>
 
@@ -229,6 +301,15 @@ body{color:var(--ink);font-family:'Archivo','Noto Sans KR',sans-serif;-webkit-fo
 </div>
 
 <div class="toast" id="toast"></div>
+
+<!-- THEME DRAWER -->
+<div class="drawer-ov" id="drawerOv" onclick="closeThemes()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-handle"></div>
+  <div class="drawer-title">테마 선택</div>
+  <div class="theme-grid" id="themeGrid"></div>
+  <div class="drawer-sub">설정한 테마는 자동 저장됩니다</div>
+</div>
 
 <script>
 const WU={
@@ -253,8 +334,8 @@ const ABS={ // 복근 블록 (월·목·토 분산, 부위 다르게)
 };
 /* 컨디셔닝 (화·금) - 덤벨/맨몸만, 라운드당 횟수 명시 */
 const COND={
- tue:{c:"cond",cc:"c-cond",d:"12분 AMRAP · 아래 1라운드 반복 (목표 6~8라운드)",e:[
-   ["덤벨 스윙 (양손 1개)","15회 / 라운드","20kg",0,0,"전신·후면",0,"덤벨 데드리프트"],
+ tue:{c:"cond",cc:"c-cond",d:"12분 AMRAP · 아래 1라운드 반복 (목표 5~7라운드)",e:[
+   ["데빌 프레스 (덤벨)","8회 / 라운드","각 12kg",0,0,"전신·폭발",0,"버피+덤벨 스내치"],
    ["덤벨 고블릿 스쿼트","12회 / 라운드","20kg",0,0,"하체",0,"점프 스쿼트"],
    ["버피","10회 / 라운드","BW",1,0,"전신",0,"마운틴클라이머 20회"]]},
  fri:{c:"cond",cc:"c-cond",d:"15분 EMOM · 매분 1종목 순환 (총 5사이클)",e:[
@@ -452,28 +533,42 @@ const ABSCC=["37kg","42kg","45kg"];
 const DAYS=[["mon","MON","Bench+복근"],["tue","TUE","Pull+컨디"],["wed","WED","어깨·팔"],["thu","THU","Legs+복근"],["fri","FRI","Upper+컨디"],["sat","SAT","Arms+복근"]];
 let cp=0,cd="mon";
 
-function key(p,d){return `hyb3_${p}_${d}`}
+/* ---------- storage ---------- */
+function key(p,d){return `hyb4_${p}_${d}`}          // 세트 완료: "exIdx-setIdx" 배열
 function getDone(p,d){try{return JSON.parse(localStorage.getItem(key(p,d))||"[]")}catch(e){return[]}}
 function setDone(p,d,arr){try{localStorage.setItem(key(p,d),JSON.stringify(arr))}catch(e){}}
+
+/* ---------- 세트 개수 파싱 ---------- */
+function setCount(ex){
+  const [n,s,w,cali,b3,mus,rest,swap,scheme]=ex;
+  if(scheme) return scheme.split('·').length;
+  // "4 × 6", "3 × 12", "5 × 10초", "리버스 · 4세트" 등
+  let m=s.match(/^(\d+)\s*[×x]/);          // "4 × 6"
+  if(m) return parseInt(m[1]);
+  m=s.match(/(\d+)\s*세트/);               // "... 4세트"
+  if(m) return parseInt(m[1]);
+  return 1;                                 // 자유/홀드 등
+}
+function exRest(ex){return ex[6]||0;}
 
 function buildBlocks(p,d){
   const day=M[p][d];
   let blocks=day.blk.slice();
-  // 복근 삽입
-  if(day.abs){
-    let ab=JSON.parse(JSON.stringify(ABS[day.abs]));
-    ab.e.forEach(e=>{if(e[2]==='__CC__')e[2]=ABSCC[p];});
-    blocks.push(ab);
-  }
-  // 컨디셔닝 삽입
-  if(day.cond){
-    let cn=JSON.parse(JSON.stringify(COND[day.cond]));
-    blocks.push(cn);
-  }
+  if(day.abs){let ab=JSON.parse(JSON.stringify(ABS[day.abs]));ab.e.forEach(e=>{if(e[2]==='__CC__')e[2]=ABSCC[p];});blocks.push(ab);}
+  if(day.cond){let cn=JSON.parse(JSON.stringify(COND[day.cond]));blocks.push(cn);}
   return blocks;
 }
-function totalEx(p,d){return buildBlocks(p,d).reduce((s,b)=>s+b.e.length,0)}
-function dayProgress(p,d){const t=totalEx(p,d);if(!t)return 0;return getDone(p,d).length/t;}
+function totalSets(p,d){let t=0;buildBlocks(p,d).forEach(b=>b.e.forEach(ex=>t+=setCount(ex)));return t;}
+function dayProgress(p,d){const t=totalSets(p,d);if(!t)return 0;return getDone(p,d).length/t;}
+
+/* ---------- 연속 완료(streak) ---------- */
+function dayComplete(p,d){return totalSets(p,d)>0 && getDone(p,d).length>=totalSets(p,d);}
+function updateStreak(){
+  // 이번 페이즈에서 완료한 요일 수를 연속 표시(간단 버전)
+  let cnt=0;DAYS.forEach(([k])=>{if(dayComplete(cp,k))cnt++;});
+  const el=document.getElementById('streakStat');
+  if(el)el.querySelector('.v').innerHTML=`${cnt}<span class="un">/6</span>`;
+}
 
 function setP(i,el){cp=i;document.querySelectorAll('.phase').forEach(p=>p.classList.remove('on'));el.classList.add('on');render();}
 function setD(d,el){cd=d;document.querySelectorAll('.day').forEach(p=>p.classList.remove('on'));el.classList.add('on');renderSess();}
@@ -482,30 +577,30 @@ function toggleWU(){document.querySelector('.wu').classList.toggle('open');}
 function renderRail(){
   document.getElementById('rail').innerHTML=DAYS.map(([k,n,f])=>{
     const pr=Math.round(dayProgress(cp,k)*100);
-    return `<div class="day${k===cd?' on':''}" onclick="setD('${k}',this)"><div class="dn">${n}</div><div class="df">${f}</div><div class="prog" style="width:${pr}%"></div></div>`;
+    const dn=dayComplete(cp,k)?' ✓':'';
+    return `<div class="day${k===cd?' on':''}" onclick="setD('${k}',this)"><div class="dn">${n}${dn}</div><div class="df">${f}</div><div class="prog" style="width:${pr}%"></div></div>`;
   }).join('');
 }
 
-let exIndex=[];
 function renderSess(){
   const d=M[cp][cd],wu=WU[d.wu],done=getDone(cp,cd);
   const blocks=buildBlocks(cp,cd);
-  exIndex=[];let gi=0;
   let h=`<div class="sess-head"><div class="sh-l"><div class="fc">${d.fc}</div><div class="ti">${d.ti}</div><div class="su">${d.su}</div></div><div class="sh-r"><div class="dur">${d.dur}'</div><div class="durl">예상</div></div></div>`;
-  const t=totalEx(cp,cd),dc=done.length,pct=t?Math.round(dc/t*100):0;
-  h+=`<div class="psum"><div class="psum-bar"><div class="psum-fill" style="width:${pct}%"></div></div><span class="psum-txt">${dc}/${t}</span><button class="reset-btn" onclick="resetDay()">리셋</button></div>`;
+  const t=totalSets(cp,cd),dc=done.length,pct=t?Math.round(dc/t*100):0;
+  h+=`<div class="psum"><div class="psum-bar"><div class="psum-fill" style="width:${pct}%"></div></div><span class="psum-txt">${dc}/${t} 세트</span><button class="reset-btn" onclick="resetDay()">리셋</button></div>`;
   h+=`<div class="wu"><div class="wu-h" onclick="toggleWU()"><span class="t">⚡ 아침 워밍업 · 10분</span><span class="ic">+</span></div><div class="wu-b">
     <div class="wu-grp"><div class="gt">Phase 1 · 각성 (3분)</div>${wu.a.map(([n,v])=>`<div class="wu-r"><span class="n">${n}</span><span class="v">${v}</span></div>`).join('')}</div>
     <div class="wu-grp"><div class="gt">Phase 2 · 활성화 (7분)</div>${wu.b.map(([n,v])=>`<div class="wu-r"><span class="n">${n}</span><span class="v">${v}</span></div>`).join('')}</div></div></div>`;
   h+=`<div class="blocks">`;
-  let bd=0;
+  let bd=0, exid=0;
   blocks.forEach(b=>{
     h+=`<div class="blk" style="animation-delay:${bd*0.05}s"><div class="blk-h"><span class="chip ${b.cc}">${b.c}</span><span class="blk-d">${b.d}</span></div>`;bd++;
     let ed=0;
     b.e.forEach((ex)=>{
       const [n,s,w,cali,b3,mus,rest,swap,scheme]=ex;
-      const idx=gi++;exIndex.push({rest,name:n});
-      const isBW=w==='BW';const isDone=done.includes(idx);
+      const myId=exid++;
+      const nSets=setCount(ex);
+      const isBW=w==='BW';
       let cls,num,unit;
       if(isBW){cls='bw';num='맨몸';unit='';}
       else if(w.startsWith('+')){cls='gain';num=w.replace('kg','');unit='가중kg';}
@@ -513,18 +608,34 @@ function renderSess(){
       else{cls='free';num=w;unit='';}
       const dot=cali?'<span class="dot s"></span>':'';
       const bb=b3?'<span class="b3b">3대</span>':'';
-      // 세트별 무게 스킴이 있으면 칩으로 표시
-      let setRow='';
+      // 완료 세트 수
+      let doneSets=0;for(let i=0;i<nSets;i++){if(done.includes(myId+'-'+i))doneSets++;}
+      const exDone=doneSets>=nSets;
+      // 세트 칩 (스킴 또는 일반)
+      let chipsArr=[];
       if(scheme){
-        const chips=scheme.split('·').map((sp,i)=>{
-          const [sw,sr]=sp.split('×');
-          return `<span class="set-chip"><b>${sw}</b><span class="sx">×${sr}</span></span>`;
-        }).join('');
-        setRow=`<div class="set-chips">${chips}</div>`;
+        chipsArr=scheme.split('·').map(sp=>{const [sw,sr]=sp.split('×');return {w:sw,r:sr};});
+      }else{
+        // 일반: 동일 무게 nSets개
+        let rr=s.match(/[×x]\s*([\d\-초/leg분]+)/);
+        const repTxt=rr?rr[1]:'';
+        for(let i=0;i<nSets;i++)chipsArr.push({w:num+(unit==='kg'?'':unit==='가중kg'?'':''),r:repTxt});
       }
+      let chips='';
+      chipsArr.forEach((cobj,i)=>{
+        const sd=done.includes(myId+'-'+i);
+        let wlabel=cobj.w;
+        if(!scheme){ // 일반운동은 무게를 칩 대신 reps만, 무게는 우측 큰숫자로
+          wlabel=(cobj.r||('S'+(i+1)));
+          chips+=`<span class="set-chip set-plain${sd?' done':''}" onclick="event.stopPropagation();toggleSet(${myId},${i},${nSets},${rest})"><b>${i+1}</b><span class="sx">세트</span></span>`;
+        }else{
+          chips+=`<span class="set-chip${sd?' done':''}" onclick="event.stopPropagation();toggleSet(${myId},${i},${nSets},${rest})"><b>${cobj.w}</b><span class="sx">×${cobj.r}</span></span>`;
+        }
+      });
+      const setRow=`<div class="set-chips">${chips}</div>`;
       const rightW = scheme ? '' : `<div class="ex-w ${cls}"><div class="num">${num}</div>${unit?`<div class="u">${unit}</div>`:''}</div>`;
-      h+=`<div class="ex${isDone?' done':''}${scheme?' has-scheme':''}" data-i="${idx}" style="animation-delay:${ed*0.03}s" onclick="toggleEx(${idx},this)">
-        <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#10120a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+      h+=`<div class="ex${exDone?' done':''} has-scheme" data-ex="${myId}" style="animation-delay:${ed*0.03}s">
+        <div class="check" onclick="toggleAllSets(${myId},${nSets})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
         <div class="ex-l"><div class="ex-n">${dot}${n}${bb}<span class="muscle-tag">${mus}</span></div>
         <div class="ex-s">${s}<span class="swap" onclick="event.stopPropagation();showSwap('${n.replace(/'/g,'')}','${swap}')">↻ 대체</span></div>${setRow}</div>
         ${rightW}</div>`;ed++;
@@ -535,23 +646,55 @@ function renderSess(){
   if(d.cardio===null){h+=`<div class="norest">🛑 별도 유산소 없음 · 컨디셔닝/헬데이가 대체</div>`;}
   else{h+=`<div class="cardio"><span class="em">🏃</span><div><div class="t">마무리 유산소 20분</div><div class="s">${d.cardio}</div></div></div>`;}
   document.getElementById('sess').innerHTML=h;
+  updateStreak();
 }
 
-function toggleEx(idx,el){
+function refreshProgress(){
+  const t=totalSets(cp,cd),dc=getDone(cp,cd).length,pct=t?Math.round(dc/t*100):0;
+  const f=document.querySelector('.psum-fill');if(f)f.style.width=pct+'%';
+  const x=document.querySelector('.psum-txt');if(x)x.textContent=`${dc}/${t} 세트`;
+  renderRail();updateStreak();
+}
+
+/* 세트 1개 토글 */
+function toggleSet(exId,setIdx,nSets,rest){
   let done=getDone(cp,cd);
-  if(done.includes(idx)){done=done.filter(x=>x!==idx);el.classList.remove('done');}
-  else{done.push(idx);el.classList.add('done');
-    const r=exIndex[idx]?exIndex[idx].rest:0;
-    if(r)openTimer(r);}
+  const tag=exId+'-'+setIdx;
+  const wasDone=done.includes(tag);
+  if(wasDone){done=done.filter(x=>x!==tag);}
+  else{done.push(tag);}
   setDone(cp,cd,done);
-  const t=totalEx(cp,cd),dc=done.length,pct=t?Math.round(dc/t*100):0;
-  document.querySelector('.psum-fill').style.width=pct+'%';
-  document.querySelector('.psum-txt').textContent=`${dc}/${t}`;
-  renderRail();
-  if(dc===t){toast('🔥 세션 완료! 수고했어');fireConfetti();}
+  // UI 업데이트 (해당 칩 + 운동 done 상태)
+  const exEl=document.querySelector(`.ex[data-ex="${exId}"]`);
+  if(exEl){
+    const chips=exEl.querySelectorAll('.set-chip');
+    if(chips[setIdx])chips[setIdx].classList.toggle('done',!wasDone);
+    let dc=0;chips.forEach((c,i)=>{if(done.includes(exId+'-'+i))dc++;});
+    exEl.classList.toggle('done',dc>=nSets);
+  }
+  refreshProgress();
+  // 세트 완료 시 타이머 (체크 해제는 제외)
+  if(!wasDone && rest>0) openTimer(rest);
+  // 세션 전체 완료 체크
+  if(getDone(cp,cd).length>=totalSets(cp,cd)){toast('🔥 세션 완료! 수고했어');fireConfetti();}
+}
+/* 운동 전체 세트 일괄 토글 (체크박스) */
+function toggleAllSets(exId,nSets){
+  let done=getDone(cp,cd);
+  let dc=0;for(let i=0;i<nSets;i++)if(done.includes(exId+'-'+i))dc++;
+  const fill=dc<nSets;
+  for(let i=0;i<nSets;i++){
+    const tag=exId+'-'+i;
+    if(fill&&!done.includes(tag))done.push(tag);
+    if(!fill)done=done.filter(x=>x!==tag);
+  }
+  setDone(cp,cd,done);
+  renderSess();
+  if(fill && getDone(cp,cd).length>=totalSets(cp,cd)){toast('🔥 세션 완료! 수고했어');fireConfetti();}
 }
 function resetDay(){setDone(cp,cd,[]);renderSess();renderRail();}
 
+/* ---------- 타이머 ---------- */
 let tLeft=0,tTotal=0,tInt=null;const R=691;
 function openTimer(sec){
   tLeft=sec;tTotal=sec;
@@ -572,17 +715,52 @@ let toastT=null;
 function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('show'),2200);}
 
 function fireConfetti(){
-  const colors=['#c6f135','#4f9bff','#3ddb8f','#ff7e3d','#b07cff'];
-  for(let i=0;i<28;i++){
+  const cs=getComputedStyle(document.documentElement);
+  const accent=cs.getPropertyValue('--accent').trim()||'#c6f135';
+  const colors=[accent,'#4f9bff','#3ddb8f','#ff7e3d','#b07cff','#ffb13d'];
+  for(let i=0;i<32;i++){
     const c=document.createElement('div');c.className='confetti';
     c.style.background=colors[i%colors.length];
-    c.style.left=(50+(Math.random()-.5)*30)+'%';c.style.top='40%';
+    c.style.left=(50+(Math.random()-.5)*30)+'%';c.style.top='38%';
     document.body.appendChild(c);
-    const ang=Math.random()*Math.PI*2,vel=180+Math.random()*220;
-    const dx=Math.cos(ang)*vel,dy=Math.sin(ang)*vel-180;
-    c.animate([{transform:'translate(0,0) rotate(0)',opacity:1},{transform:`translate(${dx}px,${dy+400}px) rotate(${Math.random()*720}deg)`,opacity:0}],{duration:1100+Math.random()*500,easing:'cubic-bezier(.2,.6,.4,1)'}).onfinish=()=>c.remove();
+    const ang=Math.random()*Math.PI*2,vel=190+Math.random()*230;
+    const dx=Math.cos(ang)*vel,dy=Math.sin(ang)*vel-200;
+    c.animate([{transform:'translate(0,0) rotate(0)',opacity:1},{transform:`translate(${dx}px,${dy+440}px) rotate(${Math.random()*720}deg)`,opacity:0}],{duration:1100+Math.random()*600,easing:'cubic-bezier(.2,.6,.4,1)'}).onfinish=()=>c.remove();
   }
 }
+
+/* ---------- 테마 ---------- */
+const THEMES=[
+  ["midnight","미드나잇 라임","#0c0d10","#c6f135"],
+  ["blood","블러드 레드","#0d0708","#ff2d3f"],
+  ["cyber","사이버 시안","#05080f","#00e5ff"],
+  ["gold","블랙 골드","#0a0908","#f5c451"],
+  ["vapor","베이퍼 바이올렛","#0b0712","#c061ff"],
+  ["forest","에메랄드","#060d0a","#2bf58a"],
+  ["ember","엠버 선셋","#0f0805","#ff7a18"],
+  ["arctic","아틱 라이트","#f4f5f8","#3b5bff"]
+];
+function applyTheme(id){
+  document.documentElement.setAttribute('data-theme',id);
+  try{localStorage.setItem('hyb_theme',id);}catch(e){}
+  // 상태바 색 동기화
+  const cs=getComputedStyle(document.documentElement);
+  const bg=cs.getPropertyValue('--bg').trim();
+  let mt=document.querySelector('meta[name=theme-color]');if(mt)mt.setAttribute('content',bg);
+  renderThemeGrid();
+}
+function renderThemeGrid(){
+  const cur=document.documentElement.getAttribute('data-theme')||'midnight';
+  document.getElementById('themeGrid').innerHTML=THEMES.map(([id,nm,bg,ac])=>
+    `<div class="theme-card${id===cur?' on':''}" style="--tc-accent:${ac}" onclick="applyTheme('${id}')">
+      <div class="tc-swatch" style="background:${bg}"><span class="acc" style="background:${ac}"></span></div>
+      <div class="tc-name">${nm}</div><div class="tc-check"></div></div>`).join('');
+}
+function openThemes(){renderThemeGrid();document.getElementById('drawerOv').classList.add('show');document.getElementById('drawer').classList.add('show');}
+function closeThemes(){document.getElementById('drawerOv').classList.remove('show');document.getElementById('drawer').classList.remove('show');}
+
+/* 저장된 테마 복원 */
+(function(){let t='midnight';try{t=localStorage.getItem('hyb_theme')||'midnight';}catch(e){}document.documentElement.setAttribute('data-theme',t);})();
 
 function render(){renderRail();renderSess();}
 render();
