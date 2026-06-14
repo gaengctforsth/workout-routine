@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="TRAINING">
 <meta name="theme-color" content="#0c0d10">
-<link rel="apple-touch-icon" href="https://gaengctforsth.github.io/workout-routine/IMG_5499.png">
+<link rel="apple-touch-icon" href="https://gaengctforsth.github.io/workout-routine/icon.png">
 <title>HYBRID · Training OS</title>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Expanded:wght@600;700;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -134,6 +134,14 @@ body{color:var(--ink);font-family:'Archivo','Noto Sans KR',sans-serif;-webkit-fo
 .ex-w.bw .num{font-size:14px;color:var(--sub);font-weight:700}
 .ex-w.free .num{font-size:13px;color:var(--dim);font-weight:600}
 .ex-w .u{font-size:8.5px;color:var(--dim);letter-spacing:1px;text-transform:uppercase;margin-top:2px;font-weight:600}
+.ex.has-scheme{flex-wrap:wrap}
+.set-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px;width:100%}
+.set-chip{display:flex;align-items:baseline;gap:1px;background:var(--bg2);border:1px solid var(--line2);border-radius:8px;padding:5px 9px;font-family:'Archivo';transition:.15s}
+.set-chip:first-child{border-color:var(--accent);background:#c6f1351a}
+.set-chip b{font-weight:800;font-size:15px;color:var(--accent);letter-spacing:-.3px}
+.set-chip .sx{font-size:10px;color:var(--sub);font-weight:600}
+.ex.done .set-chips{opacity:.4}
+.scheme-note{font-size:9px;color:var(--dim);letter-spacing:.5px;margin-top:6px;width:100%}
 
 .cardio{margin:6px 0 4px;display:flex;align-items:center;gap:13px;padding:15px 16px;background:linear-gradient(120deg,var(--hyper-bg),transparent);border:1px solid #3ddb8f33;border-radius:15px;animation:fadeUp .45s ease}
 .cardio .em{font-size:21px}
@@ -201,9 +209,9 @@ body{color:var(--ink);font-family:'Archivo','Noto Sans KR',sans-serif;-webkit-fo
   </div>
   <div class="foot">
     <b>탭하면 세트 완료 체크</b> · 진행률 자동 저장 + 휴식 타이머 자동 실행<br>
-    <b>복근 주 3회</b> (월·목·토) · 허리 얇게 유지 위해 오블리크 과부하 배제, 복직근·하복부 중심<br>
-    <b>컨디셔닝 주 2회</b> (화·금) · 크로스핏형 웨이트 메트콘 — 파이터 밀도·체지방 컷<br>
-    <b>주지태 목표</b> — 76kg 1차 → 근육 더 쌓고 → 72kg 2차 컷에서 선명도 완성
+    <b>3대·가중 맨몸 = 리버스 피라미드</b> — 무거운 톱셋부터 → 세트마다 무게↓ reps↑ (칩으로 세트별 무게 표시)<br>
+    <b>로우·OHP = 톱셋+백오프</b> — 톱셋 1개 무겁게 → 약 10% 낮춰 볼륨<br>
+    <b>증량</b> — 톱셋에서 목표 reps 다 채우면 다음에 2.5kg↑ · 컷 중엔 유지만 해도 성공
   </div>
 </div>
 
@@ -261,8 +269,8 @@ const M=[
  mon:{fc:"Push · 가슴/어깨/삼두",ti:"BENCH",su:"벤치 메인 · 하부 가슴 + 복근",dur:"70",wu:"push",abs:"mon",blk:[
   {c:"skill",cc:"c-skill",d:"어깨 컨트롤",e:[["파이크 푸쉬업","4 × 6-8","BW",1,0,"어깨",90,"HSPU 벽보조"]]},
   {c:"power",cc:"c-power",d:"3대 + 가중 맨몸",e:[
-    ["바벨 벤치프레스","5 × 5","75kg",0,1,"가슴 전체",180,"덤벨 벤치"],
-    ["가중 딥스","4 × 6","+15kg",1,0,"하부 가슴·삼두",150,"디클라인 프레스"]]},
+    ["바벨 벤치프레스","리버스 피라미드 · 4세트","72.5kg",0,1,"가슴 전체",180,"덤벨 벤치","72.5×5·67.5×6·62.5×8·62.5×8"],
+    ["가중 딥스","리버스 · 3세트","+20kg",1,0,"하부 가슴·삼두",150,"디클라인 프레스","+20×6·+12.5×8·BW×12"]]},
   {c:"hyper",cc:"c-hyper",d:"상부 가슴 + 측면 어깨",e:[
     ["인클라인 덤벨 프레스","3 × 10","26kg",0,0,"상부 가슴",90,"인클라인 머신"],
     ["케이블 레터럴 레이즈","4 × 15","10kg",0,0,"측면 어깨",60,"덤벨 레터럴"]]},
@@ -270,8 +278,8 @@ const M=[
  tue:{fc:"Pull · 등/이두 + 컨디셔닝",ti:"PULL",su:"맨몸 풀 볼륨 + 메트콘",dur:"75",wu:"pull",cond:"tue",blk:[
   {c:"skill",cc:"c-skill",d:"가장 어려운 스킬 먼저",e:[["머슬업 드릴 / 익스플로시브 풀업","5 × 3","BW",1,0,"등·전완",120,"하이 풀업"]]},
   {c:"power",cc:"c-power",d:"가중 풀업 + 로우",e:[
-    ["가중 풀업","4 × 6","+7.5kg",1,0,"광배 너비",150,"랫풀다운"],
-    ["바벨 펜들레이 로우","4 × 8","70kg",0,0,"등 두께",120,"체스트서포티드 로우"]]},
+    ["가중 풀업","리버스 · 4세트","+10kg",1,0,"광배 너비",150,"랫풀다운","+10×5·+5×7·BW×10·BW×10"],
+    ["바벨 펜들레이 로우","톱셋+백오프 · 4세트","72.5kg",0,0,"등 두께",120,"체스트서포티드 로우","72.5×6·65×8·65×8·65×8"]]},
   {c:"hyper",cc:"c-hyper",d:"너비 + 두께",e:[
     ["와이드 랫 풀다운","3 × 10","70kg",0,0,"광배 상부",90,"풀업"],
     ["시티드 케이블 로우","3 × 12","50kg",0,0,"중부 등",75,"머신 로우"]]},
@@ -292,8 +300,8 @@ const M=[
     ["피스톨 스쿼트 (보조)","3 × 6/leg","BW",1,0,"쿼드·균형",90,"스플릿 스쿼트"],
     ["박스 점프","3 × 5","BW",1,0,"폭발력",90,"점프 스쿼트"]]},
   {c:"power",cc:"c-power",d:"3대 2개 · 가장 무거운 날",e:[
-    ["바벨 백스쿼트 (딥)","5 × 5","115kg",0,1,"쿼드·둔근 (스트레치)",180,"프론트 스쿼트"],
-    ["컨벤셔널 데드리프트","4 × 3","140kg",0,1,"후면사슬·등",210,"트랩바 데드"]]},
+    ["바벨 백스쿼트 (딥)","리버스 피라미드 · 5세트","130kg",0,1,"쿼드·둔근 (스트레치)",180,"프론트 스쿼트","130×5·122.5×6·110×8·110×8·110×8"],
+    ["컨벤셔널 데드리프트","리버스 피라미드 · 4세트","125kg",0,1,"후면사슬·등",210,"트랩바 데드","125×3·115×5·105×5·105×5"]]},
   {c:"hyper",cc:"c-hyper",d:"보조",e:[
     ["불가리안 스플릿 스쿼트","3 × 10/leg","BW",1,0,"쿼드·둔근",75,"런지"],
     ["라잉 레그 컬","3 × 12","40kg",0,0,"햄스트링",60,"시티드 레그컬"],
@@ -301,7 +309,7 @@ const M=[
  fri:{fc:"Upper 종합 + 컨디셔닝",ti:"UPPER",su:"등·가슴·어깨 볼륨 + 메트콘",dur:"80",wu:"upper",cond:"fri",blk:[
   {c:"skill",cc:"c-skill",d:"맨몸 풀",e:[["와이드그립 풀업","4 × 최대","BW",1,0,"광배 너비",120,"랫풀다운"]]},
   {c:"power",cc:"c-power",d:"컴파운드",e:[
-    ["오버헤드 프레스","4 × 6","45kg",0,0,"어깨·삼두",150,"머신 숄더프레스"],
+    ["오버헤드 프레스","톱셋+백오프 · 4세트","47.5kg",0,0,"어깨·삼두",150,"머신 숄더프레스","47.5×6·42.5×8·42.5×8·42.5×8"],
     ["가중 딥스","3 × 8","+10kg",1,0,"하부 가슴·삼두",120,"디클라인 프레스"]]},
   {c:"hyper",cc:"c-hyper",d:"볼륨",e:[
     ["인클라인 덤벨 프레스","3 × 10","26kg",0,0,"상부 가슴",90,"인클라인 머신"],
@@ -321,8 +329,8 @@ const M=[
  mon:{fc:"Push · 가슴/어깨/삼두",ti:"BENCH",su:"벤치 메인 · 하부 가슴 + 복근",dur:"70",wu:"push",abs:"mon",blk:[
   {c:"skill",cc:"c-skill",d:"어깨 컨트롤",e:[["파이크 푸쉬업","4 × 8-10","BW",1,0,"어깨",90,"HSPU 벽보조"]]},
   {c:"power",cc:"c-power",d:"3대 + 가중 맨몸",e:[
-    ["바벨 벤치프레스","5 × 5","82.5kg",0,1,"가슴 전체",180,"덤벨 벤치"],
-    ["가중 딥스","4 × 6","+20kg",1,0,"하부 가슴·삼두",150,"디클라인 프레스"]]},
+    ["바벨 벤치프레스","리버스 피라미드 · 4세트","77.5kg",0,1,"가슴 전체",180,"덤벨 벤치","77.5×5·72.5×6·65×8·65×8"],
+    ["가중 딥스","리버스 · 3세트","+25kg",1,0,"하부 가슴·삼두",150,"디클라인 프레스","+25×6·+15×8·BW×12"]]},
   {c:"hyper",cc:"c-hyper",d:"상부 가슴 + 측면 어깨",e:[
     ["인클라인 덤벨 프레스","3 × 10","28kg",0,0,"상부 가슴",90,"인클라인 머신"],
     ["케이블 레터럴 레이즈","4 × 15","11kg",0,0,"측면 어깨",60,"덤벨 레터럴"]]},
@@ -330,8 +338,8 @@ const M=[
  tue:{fc:"Pull · 등/이두 + 컨디셔닝",ti:"PULL",su:"맨몸 풀 볼륨 + 메트콘",dur:"75",wu:"pull",cond:"tue",blk:[
   {c:"skill",cc:"c-skill",d:"가장 어려운 스킬 먼저",e:[["머슬업 (1-2개 목표)","5 × 3","BW",1,0,"등·전완",120,"하이 풀업"]]},
   {c:"power",cc:"c-power",d:"가중 풀업 + 로우",e:[
-    ["가중 풀업","4 × 6","+10kg",1,0,"광배 너비",150,"랫풀다운"],
-    ["바벨 펜들레이 로우","4 × 8","75kg",0,0,"등 두께",120,"체스트서포티드 로우"]]},
+    ["가중 풀업","리버스 · 4세트","+12.5kg",1,0,"광배 너비",150,"랫풀다운","+12.5×5·+7.5×7·BW×10·BW×10"],
+    ["바벨 펜들레이 로우","톱셋+백오프 · 4세트","77.5kg",0,0,"등 두께",120,"체스트서포티드 로우","77.5×6·70×8·70×8·70×8"]]},
   {c:"hyper",cc:"c-hyper",d:"너비 + 두께",e:[
     ["와이드 랫 풀다운","3 × 10","75kg",0,0,"광배 상부",90,"풀업"],
     ["시티드 케이블 로우","3 × 12","55kg",0,0,"중부 등",75,"머신 로우"]]},
@@ -352,8 +360,8 @@ const M=[
     ["피스톨 스쿼트","3 × 8/leg","BW",1,0,"쿼드·균형",90,"스플릿 스쿼트"],
     ["박스 점프","3 × 5","BW",1,0,"폭발력",90,"점프 스쿼트"]]},
   {c:"power",cc:"c-power",d:"3대 2개 · 가장 무거운 날",e:[
-    ["바벨 백스쿼트 (딥)","5 × 5","125kg",0,1,"쿼드·둔근 (스트레치)",180,"프론트 스쿼트"],
-    ["컨벤셔널 데드리프트","4 × 3","150kg",0,1,"후면사슬·등",210,"트랩바 데드"]]},
+    ["바벨 백스쿼트 (딥)","리버스 피라미드 · 5세트","137.5kg",0,1,"쿼드·둔근 (스트레치)",180,"프론트 스쿼트","137.5×5·130×6·117.5×8·117.5×8·117.5×8"],
+    ["컨벤셔널 데드리프트","리버스 피라미드 · 4세트","135kg",0,1,"후면사슬·등",210,"트랩바 데드","135×3·122.5×5·112.5×5·112.5×5"]]},
   {c:"hyper",cc:"c-hyper",d:"보조",e:[
     ["불가리안 스플릿 스쿼트","3 × 10/leg","8kg",1,0,"쿼드·둔근",75,"런지"],
     ["라잉 레그 컬","3 × 12","45kg",0,0,"햄스트링",60,"시티드 레그컬"],
@@ -361,7 +369,7 @@ const M=[
  fri:{fc:"Upper 종합 + 컨디셔닝",ti:"UPPER",su:"등·가슴·어깨 볼륨 + 메트콘",dur:"80",wu:"upper",cond:"fri",blk:[
   {c:"skill",cc:"c-skill",d:"맨몸 풀",e:[["와이드그립 풀업","4 × 최대","BW",1,0,"광배 너비",120,"랫풀다운"]]},
   {c:"power",cc:"c-power",d:"컴파운드",e:[
-    ["오버헤드 프레스","4 × 6","50kg",0,0,"어깨·삼두",150,"머신 숄더프레스"],
+    ["오버헤드 프레스","톱셋+백오프 · 4세트","52.5kg",0,0,"어깨·삼두",150,"머신 숄더프레스","52.5×6·47.5×8·47.5×8·47.5×8"],
     ["가중 딥스","3 × 8","+15kg",1,0,"하부 가슴·삼두",120,"디클라인 프레스"]]},
   {c:"hyper",cc:"c-hyper",d:"볼륨",e:[
     ["인클라인 덤벨 프레스","3 × 10","28kg",0,0,"상부 가슴",90,"인클라인 머신"],
@@ -381,8 +389,8 @@ const M=[
  mon:{fc:"Push · 가슴/어깨/삼두",ti:"BENCH",su:"벤치 메인 · 하부 가슴 + 복근",dur:"70",wu:"push",abs:"mon",blk:[
   {c:"skill",cc:"c-skill",d:"어깨 컨트롤",e:[["HSPU (벽 보조)","4 × 최대","BW",1,0,"어깨",90,"파이크 푸쉬업"]]},
   {c:"power",cc:"c-power",d:"3대 + 가중 맨몸",e:[
-    ["바벨 벤치프레스","5 × 5","90kg",0,1,"가슴 전체",180,"덤벨 벤치"],
-    ["가중 딥스","4 × 5","+25kg",1,0,"하부 가슴·삼두",150,"디클라인 프레스"]]},
+    ["바벨 벤치프레스","리버스 피라미드 · 4세트","82.5kg",0,1,"가슴 전체",180,"덤벨 벤치","82.5×5·75×6·70×8·70×8"],
+    ["가중 딥스","리버스 · 3세트","+30kg",1,0,"하부 가슴·삼두",150,"디클라인 프레스","+30×5·+20×8·BW×12"]]},
   {c:"hyper",cc:"c-hyper",d:"상부 가슴 + 측면 어깨",e:[
     ["인클라인 덤벨 프레스","3 × 10","30kg",0,0,"상부 가슴",90,"인클라인 머신"],
     ["케이블 레터럴 레이즈","4 × 15","12kg",0,0,"측면 어깨",60,"덤벨 레터럴"]]},
@@ -390,8 +398,8 @@ const M=[
  tue:{fc:"Pull · 등/이두 + 컨디셔닝",ti:"PULL",su:"맨몸 풀 볼륨 + 메트콘",dur:"75",wu:"pull",cond:"tue",blk:[
   {c:"skill",cc:"c-skill",d:"가장 어려운 스킬 먼저",e:[["머슬업 (완성 목표)","5 × 3-5","BW",1,0,"등·전완",120,"하이 풀업"]]},
   {c:"power",cc:"c-power",d:"가중 풀업 + 로우",e:[
-    ["가중 풀업","4 × 6","+12.5kg",1,0,"광배 너비",150,"랫풀다운"],
-    ["바벨 펜들레이 로우","4 × 8","80kg",0,0,"등 두께",120,"체스트서포티드 로우"]]},
+    ["가중 풀업","리버스 · 4세트","+15kg",1,0,"광배 너비",150,"랫풀다운","+15×5·+10×7·BW×10·BW×10"],
+    ["바벨 펜들레이 로우","톱셋+백오프 · 4세트","82.5kg",0,0,"등 두께",120,"체스트서포티드 로우","82.5×6·75×8·75×8·75×8"]]},
   {c:"hyper",cc:"c-hyper",d:"너비 + 두께",e:[
     ["와이드 랫 풀다운","3 × 10","80kg",0,0,"광배 상부",90,"풀업"],
     ["시티드 케이블 로우","3 × 12","57.5kg",0,0,"중부 등",75,"머신 로우"]]},
@@ -412,8 +420,8 @@ const M=[
     ["피스톨 스쿼트 (가중)","3 × 8/leg","+5kg",1,0,"쿼드·균형",90,"스플릿 스쿼트"],
     ["박스 점프","3 × 5","BW",1,0,"폭발력",90,"점프 스쿼트"]]},
   {c:"power",cc:"c-power",d:"3대 2개 · 가장 무거운 날",e:[
-    ["바벨 백스쿼트 (딥)","5 × 5","135kg",0,1,"쿼드·둔근 (스트레치)",180,"프론트 스쿼트"],
-    ["컨벤셔널 데드리프트","4 × 3","160kg",0,1,"후면사슬·등",210,"트랩바 데드"]]},
+    ["바벨 백스쿼트 (딥)","리버스 피라미드 · 5세트","145kg",0,1,"쿼드·둔근 (스트레치)",180,"프론트 스쿼트","145×5·135×6·122.5×8·122.5×8·122.5×8"],
+    ["컨벤셔널 데드리프트","리버스 피라미드 · 4세트","145kg",0,1,"후면사슬·등",210,"트랩바 데드","145×3·130×5·120×5·120×5"]]},
   {c:"hyper",cc:"c-hyper",d:"보조",e:[
     ["불가리안 스플릿 스쿼트","3 × 10/leg","12kg",1,0,"쿼드·둔근",75,"런지"],
     ["라잉 레그 컬","3 × 12","50kg",0,0,"햄스트링",60,"시티드 레그컬"],
@@ -421,7 +429,7 @@ const M=[
  fri:{fc:"Upper 종합 + 컨디셔닝",ti:"UPPER",su:"등·가슴·어깨 볼륨 + 메트콘",dur:"80",wu:"upper",cond:"fri",blk:[
   {c:"skill",cc:"c-skill",d:"맨몸 풀",e:[["와이드그립 풀업 (목표 15+)","4 × 최대","BW",1,0,"광배 너비",120,"랫풀다운"]]},
   {c:"power",cc:"c-power",d:"컴파운드",e:[
-    ["오버헤드 프레스","4 × 6","55kg",0,0,"어깨·삼두",150,"머신 숄더프레스"],
+    ["오버헤드 프레스","톱셋+백오프 · 4세트","57.5kg",0,0,"어깨·삼두",150,"머신 숄더프레스","57.5×6·52.5×8·52.5×8·52.5×8"],
     ["가중 딥스","3 × 8","+20kg",1,0,"하부 가슴·삼두",120,"디클라인 프레스"]]},
   {c:"hyper",cc:"c-hyper",d:"볼륨",e:[
     ["인클라인 덤벨 프레스","3 × 10","30kg",0,0,"상부 가슴",90,"인클라인 머신"],
@@ -494,7 +502,8 @@ function renderSess(){
   blocks.forEach(b=>{
     h+=`<div class="blk" style="animation-delay:${bd*0.05}s"><div class="blk-h"><span class="chip ${b.cc}">${b.c}</span><span class="blk-d">${b.d}</span></div>`;bd++;
     let ed=0;
-    b.e.forEach(([n,s,w,cali,b3,mus,rest,swap])=>{
+    b.e.forEach((ex)=>{
+      const [n,s,w,cali,b3,mus,rest,swap,scheme]=ex;
       const idx=gi++;exIndex.push({rest,name:n});
       const isBW=w==='BW';const isDone=done.includes(idx);
       let cls,num,unit;
@@ -504,11 +513,21 @@ function renderSess(){
       else{cls='free';num=w;unit='';}
       const dot=cali?'<span class="dot s"></span>':'';
       const bb=b3?'<span class="b3b">3대</span>':'';
-      h+=`<div class="ex${isDone?' done':''}" data-i="${idx}" style="animation-delay:${ed*0.03}s" onclick="toggleEx(${idx},this)">
+      // 세트별 무게 스킴이 있으면 칩으로 표시
+      let setRow='';
+      if(scheme){
+        const chips=scheme.split('·').map((sp,i)=>{
+          const [sw,sr]=sp.split('×');
+          return `<span class="set-chip"><b>${sw}</b><span class="sx">×${sr}</span></span>`;
+        }).join('');
+        setRow=`<div class="set-chips">${chips}</div>`;
+      }
+      const rightW = scheme ? '' : `<div class="ex-w ${cls}"><div class="num">${num}</div>${unit?`<div class="u">${unit}</div>`:''}</div>`;
+      h+=`<div class="ex${isDone?' done':''}${scheme?' has-scheme':''}" data-i="${idx}" style="animation-delay:${ed*0.03}s" onclick="toggleEx(${idx},this)">
         <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#10120a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
         <div class="ex-l"><div class="ex-n">${dot}${n}${bb}<span class="muscle-tag">${mus}</span></div>
-        <div class="ex-s">${s}<span class="swap" onclick="event.stopPropagation();showSwap('${n.replace(/'/g,'')}','${swap}')">↻ 대체</span></div></div>
-        <div class="ex-w ${cls}"><div class="num">${num}</div>${unit?`<div class="u">${unit}</div>`:''}</div></div>`;ed++;
+        <div class="ex-s">${s}<span class="swap" onclick="event.stopPropagation();showSwap('${n.replace(/'/g,'')}','${swap}')">↻ 대체</span></div>${setRow}</div>
+        ${rightW}</div>`;ed++;
     });
     h+=`</div>`;
   });
